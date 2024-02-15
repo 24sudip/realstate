@@ -1,0 +1,6 @@
+//
+1.php artisan make:seeder UsersTableSeeder;
+2.php artisan migrate:fresh --seed;
+3.php artisan r:l;
+4.php artisan make:middleware EnsureTokenIsValid;
+5.
