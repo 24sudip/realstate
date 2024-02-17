@@ -33,7 +33,10 @@ Route::middleware('auth')->group(function () {
 // group admin middleware
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
+
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 // group agent middleware
 Route::middleware(['auth','role:agent'])->group(function () {
