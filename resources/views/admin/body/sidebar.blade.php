@@ -13,7 +13,7 @@
         <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-                <a href="dashboard.html" class="nav-link">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
@@ -376,22 +376,5 @@
                 </a>
             </li>
         </ul>
-    </div>
-</nav>
-<nav class="settings-sidebar">
-    <div class="sidebar-body">
-        <a href="#" class="settings-sidebar-toggler">
-            <i data-feather="settings"></i>
-        </a>
-        <div class="theme-wrapper">
-            <h6 class="text-muted mb-2">Light Theme:</h6>
-            <a class="theme-item" href="../demo1/dashboard.html">
-                <img src="{{ asset('dashboard_assets/images') }}/screenshots/light.jpg" alt="light theme">
-            </a>
-            <h6 class="text-muted mb-2">Dark Theme:</h6>
-            <a class="theme-item active" href="../demo2/dashboard.html">
-                <img src="{{ asset('dashboard_assets/images') }}/screenshots/dark.jpg" alt="light theme">
-            </a>
-        </div>
     </div>
 </nav>

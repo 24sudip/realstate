@@ -34,6 +34,13 @@
   <!-- End layout styles -->
 
   <link rel="shortcut icon" href="{{ asset('dashboard_assets/images') }}/favicon.png" />
+  <style type="text/css">
+    .auth-login-side-wrapper {
+        width: 100%;
+        height: 100%;
+        background-image: url({{ asset('upload/login.png') }});
+    }
+  </style>
 </head>
 <body>
 	<div class="main-wrapper">
@@ -45,7 +52,7 @@
 						<div class="card">
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
-                  <div class="auth-side-wrapper">
+                  <div class="auth-login-side-wrapper">
 
                   </div>
                 </div>

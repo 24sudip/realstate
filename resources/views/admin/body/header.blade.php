@@ -21,15 +21,6 @@
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
                     <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
                             title="us" id="us"></i> <span class="ms-1"> English </span></a>
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
-                            title="fr" id="fr"></i> <span class="ms-1"> French </span></a>
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-de"
-                            title="de" id="de"></i> <span class="ms-1"> German </span></a>
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-pt"
-                            title="pt" id="pt"></i> <span class="ms-1"> Portuguese
-                        </span></a>
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-es"
-                            title="es" id="es"></i> <span class="ms-1"> Spanish </span></a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -230,35 +221,39 @@
                     </div>
                 </div>
             </li>
+            @php
+                $id = Auth::user()->id;
+                $profile_data = App\Models\User::find($id);
+            @endphp
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                    <img class="wd-30 ht-30 rounded-circle" src="{{ (!empty($profile_data->photo)) ? url('upload/admin_photos/'.$profile_data->photo) : url('upload/no_image.jpg') }}"
                         alt="profile">
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                     <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                         <div class="mb-3">
                             <img class="wd-80 ht-80 rounded-circle"
-                                src="https://via.placeholder.com/80x80" alt="">
+                                src="{{ (!empty($profile_data->photo)) ? url('upload/admin_photos/'.$profile_data->photo) : url('upload/no_image.jpg') }}" alt="">
                         </div>
                         <div class="text-center">
-                            <p class="tx-16 fw-bolder">Amiah Burton</p>
-                            <p class="tx-12 text-muted">amiahburton@gmail.com</p>
+                            <p class="tx-16 fw-bolder">{{ $profile_data->name }}</p>
+                            <p class="tx-12 text-muted">{{ $profile_data->email }}</p>
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
                         <li class="dropdown-item py-2">
-                            <a href="{{ asset('backend/pages') }}/general/profile.html"
+                            <a href="{{ route('admin.profile') }}"
                                 class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="user"></i>
                                 <span>Profile</span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
+                            <a href="{{ route('admin.change.password') }}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="edit"></i>
-                                <span>Edit Profile</span>
+                                <span>Change Password</span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
