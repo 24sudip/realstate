@@ -4,4 +4,7 @@
 3.php artisan r:l;
 4.php artisan make:middleware EnsureTokenIsValid;
 5.php artisan optimize;
-6.
+6.php artisan config:cache;
+7.php artisan cache:clear;
+8.php artisan view:clear;
+9.
