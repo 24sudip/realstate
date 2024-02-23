@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +30,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/user/profile', [UserController::class, 'UserProfile'])->name('user.profile');
+    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+    Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
+    Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Admin Group Middleware
@@ -49,6 +51,16 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 // Agent Group Middleware
 Route::middleware(['auth','role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
+});
+
+Route::middleware(['auth','role:admin'])->group(function () {
+    // Property Type Routes
+    Route::controller(PropertyTypeController::class)->group(function () {
+        Route::get('/all/type', 'AllType')->name('all.type');
+        Route::get('/add/type', 'AddType')->name('add.type');
+        Route::post('/store/type', 'StoreType')->name('store.type');
+        // Route::post('/orders', 'store');
+    });
 });
 
 require __DIR__.'/auth.php';

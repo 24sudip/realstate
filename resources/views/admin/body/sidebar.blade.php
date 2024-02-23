@@ -18,26 +18,21 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item nav-category">web apps</li>
+            <li class="nav-item nav-category">Real Estate</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button"
                     aria-expanded="false" aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
-                    <span class="link-title">Email</span>
+                    <span class="link-title">Property Type</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/email/inbox.html" class="nav-link">Inbox</a>
-                            {{-- <a href="{{ asset('') }}" class="nav-link">Inbox</a> --}}
+                            <a href="{{ route('all.type') }}" class="nav-link">All Type</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/email/read.html" class="nav-link">Read</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/email/compose.html"
-                                class="nav-link">Compose</a>
+                            <a href="{{ route('add.type') }}" class="nav-link">Add Type</a>
                         </li>
                     </ul>
                 </div>
@@ -68,94 +63,6 @@
                             <a href="{{ asset('backend/pages') }}/ui-components/accordion.html"
                                 class="nav-link">Accordion</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/alerts.html"
-                                class="nav-link">Alerts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/badges.html"
-                                class="nav-link">Badges</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/breadcrumbs.html"
-                                class="nav-link">Breadcrumbs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/buttons.html"
-                                class="nav-link">Buttons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/button-group.html"
-                                class="nav-link">Button group</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/cards.html"
-                                class="nav-link">Cards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/carousel.html"
-                                class="nav-link">Carousel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/collapse.html"
-                                class="nav-link">Collapse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/dropdowns.html"
-                                class="nav-link">Dropdowns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/list-group.html"
-                                class="nav-link">List group</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/media-object.html"
-                                class="nav-link">Media object</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/modal.html"
-                                class="nav-link">Modal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/navs.html"
-                                class="nav-link">Navs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/navbar.html"
-                                class="nav-link">Navbar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/pagination.html"
-                                class="nav-link">Pagination</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/popover.html"
-                                class="nav-link">Popovers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/progress.html"
-                                class="nav-link">Progress</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/scrollbar.html"
-                                class="nav-link">Scrollbar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/scrollspy.html"
-                                class="nav-link">Scrollspy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/spinners.html"
-                                class="nav-link">Spinners</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/tabs.html"
-                                class="nav-link">Tabs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/tooltips.html"
-                                class="nav-link">Tooltips</a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -171,18 +78,6 @@
                         <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/advanced-ui/cropper.html"
                                 class="nav-link">Cropper</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/advanced-ui/owl-carousel.html"
-                                class="nav-link">Owl carousel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/advanced-ui/sortablejs.html"
-                                class="nav-link">SortableJs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/advanced-ui/sweet-alert.html"
-                                class="nav-link">Sweet Alert</a>
                         </li>
                     </ul>
                 </div>
@@ -200,18 +95,6 @@
                             <a href="{{ asset('backend/pages') }}/forms/basic-elements.html"
                                 class="nav-link">Basic Elements</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/forms/advanced-elements.html"
-                                class="nav-link">Advanced Elements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/forms/editors.html"
-                                class="nav-link">Editors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/forms/wizard.html"
-                                class="nav-link">Wizard</a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -226,25 +109,6 @@
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/charts/apex.html" class="nav-link">Apex</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/chartjs.html"
-                                class="nav-link">ChartJs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/flot.html" class="nav-link">Flot</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/morrisjs.html"
-                                class="nav-link">Morris</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/peity.html"
-                                class="nav-link">Peity</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/sparkline.html"
-                                class="nav-link">Sparkline</a>
                         </li>
                     </ul>
                 </div>
@@ -262,10 +126,6 @@
                             <a href="{{ asset('backend/pages') }}/tables/basic-table.html"
                                 class="nav-link">Basic Tables</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/tables/data-table.html"
-                                class="nav-link">Data Table</a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -281,14 +141,6 @@
                         <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/icons/feather-icons.html"
                                 class="nav-link">Feather Icons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/icons/flag-icons.html"
-                                class="nav-link">Flag Icons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/icons/mdi-icons.html" class="nav-link">Mdi
-                                Icons</a>
                         </li>
                     </ul>
                 </div>
@@ -307,25 +159,6 @@
                         <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/general/blank-page.html"
                                 class="nav-link">Blank page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/faq.html" class="nav-link">Faq</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/invoice.html"
-                                class="nav-link">Invoice</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/profile.html"
-                                class="nav-link">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/pricing.html"
-                                class="nav-link">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/timeline.html"
-                                class="nav-link">Timeline</a>
                         </li>
                     </ul>
                 </div>

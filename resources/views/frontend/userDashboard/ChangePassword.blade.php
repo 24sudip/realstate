@@ -1,14 +1,15 @@
 @extends('frontend.FrontendDashboard')
 
 @section('main')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!--Page Title-->
 <section class="page-title centred" style="background-image: url({{ asset('frontend_assets/images') }}/background/page-title-5.jpg);">
     <div class="auto-container">
         <div class="content-box clearfix">
-            <h1>User Profile </h1>
+            <h1>Change Password </h1>
             <ul class="bread-crumb clearfix">
-                <li><a href="index.html">Home</a></li>
-                <li>User Profile </li>
+                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li>Change Password </li>
             </ul>
         </div>
     </div>
@@ -39,7 +40,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="sidebar-widget category-widget">
                         <div class="widget-title">
                             <h4>Menu</h4>
@@ -53,38 +53,33 @@
                     <div class="news-block-one">
                         <div class="inner-box">
                             <div class="lower-content">
-                                <h3>Including Animation In Your Design System.</h3>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="card-body" style="background-color: #1baf65;">
-                                            <h1 class="card-title" style="color: white; font-weight: bold;">0</h1>
-                                            <h5 class="card-text"style="color: white;"> Approved properties</h5>
-                                        </div>
+                                <form action="{{ route('user.password.update') }}" method="post" class="default-form" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label>Old Password</label>
+                                        <input type="password" name="old_password" class="form-control
+                                        @error('old_password') is-invalid @enderror " id="old_password" autocomplete="off" placeholder="Old Password">
+                                        @error('old_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card-body" style="background-color: #ffc107;">
-                                            <h1 class="card-title" style="color: white; font-weight: bold; ">0</h1>
-                                            <h5 class="card-text"style="color: white;"> Pending approve properties</h5>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>New Password</label>
+                                        <input type="password" name="new_password" class="form-control
+                                        @error('new_password') is-invalid @enderror " id="new_password" autocomplete="off" placeholder="New Password">
+                                        @error('new_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card-body" style="background-color: #002758;">
-                                            <h1 class="card-title" style="color: white; font-weight: bold;">0</h1>
-                                            <h5 class="card-text"style="color: white; "> Rejected properties</h5>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Confirm New Password</label>
+                                        <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation" autocomplete="off" placeholder="Confirm New Password">
                                     </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-details-content">
-                    <div class="news-block-one">
-                        <div class="inner-box">
-                            <div class="lower-content">
-                                <h3>Activity Logs</h3>
-                                <hr>
+                                    <div class="form-group message-btn">
+                                        <button type="submit" class="theme-btn btn-one">Save Changes </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -95,7 +90,6 @@
 </section>
 <!-- sidebar-page-container -->
 
-<!-- subscribe-section -->
 @include('frontend.home.subscribe')
-<!-- subscribe-section end -->
+
 @endsection

@@ -19,6 +19,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- End fonts -->
 
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('dashboard_assets/vendors') }}/datatables.net-bs5/dataTables.bootstrap5.css">
+	<!-- End plugin css for this page -->
+
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('dashboard_assets/vendors') }}/core/core.css">
     <!-- endinject -->
@@ -38,7 +42,7 @@
 
     <link rel="shortcut icon" href="{{ asset('dashboard_assets/images') }}/favicon.png" />
     {{-- <link rel="shortcut icon" href="" /> --}}
-     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 </head>
 
 <body>
@@ -80,7 +84,7 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('dashboard_assets/js') }}/dashboard-dark.js"></script>
     <!-- End custom js for this page -->
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
  @if(Session::has('message'))
@@ -104,6 +108,13 @@
  }
  @endif
 </script>
+
+<!-- Start dataTable -->
+<script src="{{ asset('dashboard_assets/vendors') }}/datatables.net/jquery.dataTables.js"></script>
+<script src="{{ asset('dashboard_assets/vendors') }}/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+<script src="{{ asset('dashboard_assets/js') }}/data-table.js"></script>
+<!-- End dataTable -->
+
 </body>
 
 </html>
