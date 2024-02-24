@@ -54,14 +54,17 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button"
                     aria-expanded="false" aria-controls="uiComponents">
                     <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">UI Kit</span>
+                    <span class="link-title">Amenities</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="uiComponents">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
+                            <a href="{{ route('all.amenities') }}" class="nav-link">All Amenities</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/ui-components/accordion.html"
-                                class="nav-link">Accordion</a>
+                                class="nav-link">Add Amenities</a>
                         </li>
                     </ul>
                 </div>

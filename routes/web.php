@@ -53,13 +53,27 @@ Route::middleware(['auth','role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
 });
 
+// Property Type Routes
 Route::middleware(['auth','role:admin'])->group(function () {
-    // Property Type Routes
     Route::controller(PropertyTypeController::class)->group(function () {
         Route::get('/all/type', 'AllType')->name('all.type');
         Route::get('/add/type', 'AddType')->name('add.type');
         Route::post('/store/type', 'StoreType')->name('store.type');
-        // Route::post('/orders', 'store');
+        Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
+        Route::post('/update/type', 'UpdateType')->name('update.type');
+        Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
+    });
+});
+
+// Amenities Routes
+Route::middleware(['auth','role:admin'])->group(function () {
+    Route::controller(PropertyTypeController::class)->group(function () {
+        Route::get('/all/amenities', 'AllAmenities')->name('all.amenities');
+        Route::get('/add/amenities', 'AddAmenities')->name('add.amenities');
+        Route::post('/store/type', 'StoreType')->name('store.type');
+        Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
+        Route::post('/update/type', 'UpdateType')->name('update.type');
+        Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
     });
 });
 
