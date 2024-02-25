@@ -10,12 +10,14 @@
                 <div class="col-md-12 grid-margin">
                     <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">Add Amenities</h6>
-                        <form method="POST" action="{{ route('store.amenities') }}" class="forms-sample" id="myForm">
+                        <h6 class="card-title">Edit Amenities</h6>
+                        <form method="POST" action="{{ route('update.amenities') }}" class="forms-sample" id="myForm">
                         @csrf
+                        <input type="hidden" name="id" value="{{ $amenities->id }}">
                             <div class="form-group mb-3">
                                 <label class="form-label">Amenities Name</label>
-                                <input type="text" name="amenities_name" class="form-control" placeholder="Amenities Name">
+                                <input type="text" name="amenities_name" class="form-control"
+                                value="{{ $amenities->amenities_name }}">
                             </div>
 
                             <button type="submit" class="btn btn-primary me-2">Save Changes</button>

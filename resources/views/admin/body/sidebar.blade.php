@@ -63,8 +63,7 @@
                             <a href="{{ route('all.amenities') }}" class="nav-link">All Amenities</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/ui-components/accordion.html"
-                                class="nav-link">Add Amenities</a>
+                            <a href="{{ route('add.amenities') }}" class="nav-link">Add Amenities</a>
                         </li>
                     </ul>
                 </div>
@@ -73,14 +72,16 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button"
                     aria-expanded="false" aria-controls="advancedUI">
                     <i class="link-icon" data-feather="anchor"></i>
-                    <span class="link-title">Advanced UI</span>
+                    <span class="link-title">Property</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/advanced-ui/cropper.html"
-                                class="nav-link">Cropper</a>
+                            <a href="{{ route('all.property') }}" class="nav-link">All Property</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('add.property') }}" class="nav-link">Add Property</a>
                         </li>
                     </ul>
                 </div>
