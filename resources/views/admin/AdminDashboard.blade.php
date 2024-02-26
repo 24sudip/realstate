@@ -19,6 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- End fonts -->
 
+    <link rel="stylesheet" href="{{ asset('dashboard_assets/vendors') }}/select2/select2.min.css">
+	<link rel="stylesheet" href="{{ asset('dashboard_assets/vendors') }}/jquery-tags-input/jquery.tagsinput.min.css">
+
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('dashboard_assets/vendors') }}/datatables.net-bs5/dataTables.bootstrap5.css">
 	<!-- End plugin css for this page -->
@@ -118,6 +121,23 @@
 <script src="{{ asset('dashboard_assets/vendors') }}/datatables.net-bs5/dataTables.bootstrap5.js"></script>
 <script src="{{ asset('dashboard_assets/js') }}/data-table.js"></script>
 <!-- End dataTable -->
+
+<!-- Input Tag -->
+<script src="{{ asset('dashboard_assets/vendors') }}/inputmask/jquery.inputmask.min.js"></script>
+<script src="{{ asset('dashboard_assets/vendors') }}/select2/select2.min.js"></script>
+<script src="{{ asset('dashboard_assets/vendors') }}/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="{{ asset('dashboard_assets/vendors') }}/jquery-tags-input/jquery.tagsinput.min.js"></script>
+
+<script src="{{ asset('dashboard_assets/js') }}/inputmask.js"></script>
+<script src="{{ asset('dashboard_assets/js') }}/select2.js"></script>
+<script src="{{ asset('dashboard_assets/js') }}/typeahead.js"></script>
+<script src="{{ asset('dashboard_assets/js') }}/tags-input.js"></script>
+<!-- input tag -->
+
+<!-- tinymce -->
+<script src="{{ asset('dashboard_assets/vendors') }}/tinymce/tinymce.min.js"></script>
+<script src="{{ asset('dashboard_assets/js') }}/tinymce.js"></script>
+<!-- tinymce -->
 
 </body>
 
