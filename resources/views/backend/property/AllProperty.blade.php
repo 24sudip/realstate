@@ -24,6 +24,7 @@
                             <th>P Type</th>
                             <th>Status Type</th>
                             <th>City</th>
+                            <th>Code</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -32,12 +33,13 @@
                             @foreach($property as $key => $item)
                             <tr>
                             <td>{{ $key+1 }}</td>
-                            <td><img src="{{ asset($item->property_thumbnail) }}" style="width: 70px;height: 40px;">
+                            <td><img src="{{ asset('upload/property/thumbnail') }}/{{$item->property_thumbnail}}" style="width: 74px;height: 50px;">
                             </td>
                             <td>{{ $item->property_name }}</td>
-                            <td>{{ $item->ptype_id }}</td>
+                            <td>{{ $item['relation_to_type']['type_name'] }}</td>
                             <td>{{ $item->property_status }}</td>
                             <td>{{ $item->city }}</td>
+                            <td>{{ $item->property_code }}</td>
                             <td>
                                 @if ($item->status == 1)
                                 <span class="badge rounded-pill bg-success">Active</span>
@@ -46,7 +48,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('edit.amenities', $item->id) }}" class="btn btn-inverse-warning">Edit</a>
+                                <a href="{{ route('edit.property', $item->id) }}" class="btn btn-inverse-warning">Edit</a>
                                 <a href="{{ route('delete.amenities', $item->id) }}" class="btn btn-inverse-danger" id="delete">Delete</a>
                             </td>
                             </tr>

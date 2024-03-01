@@ -9,4 +9,8 @@ class Property extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function relation_to_type()
+    {
+        return $this->belongsTo(PropertyType::class,'ptype_id','id');
+    }
 }
