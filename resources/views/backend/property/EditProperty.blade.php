@@ -48,14 +48,6 @@
                                     </div><!-- Col -->
                                     {{-- <div class="col-sm-6">
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Main Thumbnail</label>
-                                            <input type="file" name="property_thumbnail" class="form-control"
-                                            onchange="mainThumUrl(this)">
-                                            <img src="" id="mainThmb">
-                                        </div>
-                                    </div><!-- Col --> --}}
-                                    {{-- <div class="col-sm-6">
-                                        <div class="form-group mb-3">
                                             <label class="form-label">Multiple Image</label>
                                             <input type="file" name="multi_img[]" id="multiImg" multiple class="form-control">
                                             <div class="row" id="preview_img"></div>
@@ -267,6 +259,98 @@
         <!-- middle wrapper end -->
     </div>
 </div>
+
+{{-- Property Thumbnail Update --}}
+<div class="page-content" style="margin-top: -35px;">
+    <div class="row profile-body">
+        <!-- middle wrapper start -->
+        <div class="col-md-12 col-xl-12 middle-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Edit Property Thumbnail</h6>
+                            <form method="POST" action="{{ route('update.property.thumbnail') }}" id="myForm" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $property->id }}">
+                                <input type="hidden" name="old_img" value="{{ $property->property_thumbnail }}">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Main Thumbnail</label>
+                                            <input type="file" name="property_thumbnail" class="form-control"
+                                            onchange="mainThumUrl(this)">
+                                            <img src="" id="mainThmb">
+                                        </div>
+                                    </div><!-- Col -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label"></label>
+                                            <img src="{{ asset('upload/property/thumbnail') }}/{{ $property->property_thumbnail }}"
+                                            style="width: 100px;height: 100px;">
+                                        </div>
+                                    </div><!-- Col -->
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Property Thumbnail Update --}}
+
+{{-- Property Multi-Image Update --}}
+<div class="page-content" style="margin-top: -35px;">
+    <div class="row profile-body">
+        <!-- middle wrapper start -->
+        <div class="col-md-12 col-xl-12 middle-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Edit Multi Image</h6>
+                            <form method="POST" action="{{ route('update.property.thumbnail') }}" id="myForm" enctype="multipart/form-data">
+                                @csrf
+                                <div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Sl</th>
+												<th>Image</th>
+												<th>Change Image</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+                                            @foreach($multi_image as $key => $m_img)
+											<tr>
+                                                <td>{{ $key+1 }}</td>
+												<td class="py-1">
+													<img src="{{ asset('upload/property/multi-image') }}/{{ $m_img->photo_name }}" alt="image">
+												</td>
+												<td>
+													<input type="file" class="form-group" name="multi_img">
+												</td>
+												<td><input type="submit" class="btn btn-primary px-4" value="Update Image"></td>
+											</tr>
+                                            @endforeach
+										</tbody>
+									</table>
+								</div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Property Multi-Image Update --}}
 
 <!--========== Start of add multiple class with ajax ==============-->
 {{-- <div style="visibility: hidden">

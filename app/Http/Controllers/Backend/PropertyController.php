@@ -124,10 +124,12 @@ class PropertyController extends Controller
         $amen_type = $property->amenities_id;
         $property_amenities = explode(',',$amen_type);
 
+        $multi_image = MultiImage::where('property_id',$id)->get();
+
         $property_type = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
-        return view('backend.property.EditProperty', compact('property','property_type','amenities','activeAgent','property_amenities'));
+        return view('backend.property.EditProperty', compact('property','property_type','amenities','activeAgent','property_amenities','multi_image'));
     }
 
     public function UpdateProperty(Request $request)
@@ -173,6 +175,35 @@ class PropertyController extends Controller
             'alert-type'=>'success',
         );
         return redirect()->route('all.property')->with($notification);
+    }
+
+    public function UpdatePropertyThumbnail(Request $request)
+    {
+        $pro_id = $request->id;
+        $old_img = $request->old_img;
+        if ($request->hasFile('property_thumbnail')) {
+            $manager = new ImageManager(new Driver());
+            $img_extension = $request->file('property_thumbnail')->getClientOriginalExtension();
+            $new_name = hexdec(uniqid()).".".$img_extension;
+            $img = $manager->read($request->file('property_thumbnail'))->resize(370,250);
+            if (file_exists('upload/property/thumbnail/'.$old_img)) {
+                unlink(public_path('upload/property/thumbnail/'.$old_img));
+            }
+            if ($img_extension == "png") {
+                $img->toPng(80)->save(base_path('public/upload/property/thumbnail/'.$new_name));
+            } else {
+                $img->toJpeg(80)->save(base_path('public/upload/property/thumbnail/'.$new_name));
+            }
+            Property::findOrFail($pro_id)->update([
+                'property_thumbnail'=>$new_name,
+                'updated_at'=>now(),
+            ]);
+        }
+        $notification = array(
+            'message'=>'Property Thumbnail Updated Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
     }
 
     // public function DeleteType($id)
