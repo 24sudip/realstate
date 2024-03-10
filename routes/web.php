@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,12 +47,18 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 });
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 // Agent Group Middleware
 Route::middleware(['auth','role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
+    Route::get('/agent/logout', [AgentController::class, 'AgentLogout'])->name('agent.logout');
+    Route::get('/agent/profile', [AgentController::class, 'AgentProfile'])->name('agent.profile');
 });
+
+Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
+
+Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
 
 // Type-of-property Routes
 Route::middleware(['auth','role:admin'])->group(function () {
@@ -84,6 +91,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
         Route::post('/update/property', 'UpdateProperty')->name('update.property');
         Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
+        Route::post('/active/property', 'ActiveProperty')->name('active.property');
         Route::post('/update/property/thumbnail', 'UpdatePropertyThumbnail')->name('update.property.thumbnail');
         Route::post('/update/property/multiImage', 'UpdatePropertyMultiImage')->name('update.property.multiImage');
         Route::get('/delete/property/multiImage/{id}', 'DeletePropertyMultiImage')->name('delete.property.multiImage');

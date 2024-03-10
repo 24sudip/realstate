@@ -345,4 +345,17 @@ class PropertyController extends Controller
         );
         return redirect()->route('all.property')->with($notification);
     }
+
+    public function ActiveProperty(Request $request)
+    {
+        $p_id = $request->id;
+        Property::findOrFail($p_id)->update([
+            'status'=>1,
+        ]);
+        $notification = array(
+            'message'=>'Property Active Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('all.property')->with($notification);
+    }
 }

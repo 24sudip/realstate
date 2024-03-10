@@ -153,7 +153,7 @@
                             <button type="submit" class="btn btn-primary">Inactive</button>
                         </form>
                         @else
-                        <form method="POST" action="{{ route('store.property') }}">
+                        <form method="POST" action="{{ route('active.property') }}">
                             @csrf
                             <input type="hidden" name="id" value="{{ $property->id }}">
                             <button type="submit" class="btn btn-primary">Active</button>
@@ -165,42 +165,4 @@
         </div>
     </div>
 </div>
-
-<!--========== Start of add multiple class with ajax ==============-->
-{{-- <div style="visibility: hidden">
-   <div class="whole_extra_item_add" id="whole_extra_item_add">
-      <div class="whole_extra_item_delete" id="whole_extra_item_delete">
-         <div class="container mt-2">
-            <div class="row">
-
-               <div class="form-group col-md-4">
-                  <label for="facility_name">Facilities</label>
-                  <select name="facility_name[]" id="facility_name" class="form-control">
-                        <option value="">Select Facility</option>
-                        <option value="Hospital">Hospital</option>
-                        <option value="SuperMarket">Super Market</option>
-                        <option value="School">School</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Pharmacy">Pharmacy</option>
-                        <option value="Airport">Airport</option>
-                        <option value="Railways">Railways</option>
-                        <option value="Bus Stop">Bus Stop</option>
-                        <option value="Beach">Beach</option>
-                        <option value="Mall">Mall</option>
-                        <option value="Bank">Bank</option>
-                  </select>
-               </div>
-               <div class="form-group col-md-4">
-                  <label for="distance">Distance</label>
-                  <input type="text" name="distance[]" id="distance" class="form-control" placeholder="Distance (Km)">
-               </div>
-               <div class="form-group col-md-4" style="padding-top: 20px">
-                  <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
-                  <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle">Remove</i></span>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div> --}}
 @endsection
