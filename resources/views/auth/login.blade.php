@@ -19,7 +19,6 @@
 </section>
 <!--End Page Title-->
 
-
 <!-- ragister-section -->
 <section class="ragister-section centred sec-pad">
     <div class="auto-container">
@@ -58,8 +57,9 @@
                         </div>
                         <div class="tab" id="tab-2">
                             <div class="inner-box">
-                                <h4><a href="{{ url('/register') }}">Click to Register</a></h4>
-                                {{-- <form action="{{ route('register') }}" method="post" class="default-form">
+                                <h4>Sign Up</h4>
+                                {{-- <a href="{{ url('/register') }}">Click to Register</a> --}}
+                                <form action="{{ route('register') }}" method="post" class="default-form">
                                     @csrf
                                     <div class="form-group">
                                         <label>User name</label>
@@ -83,7 +83,7 @@
                                 </form>
                                 <div class="othre-text">
                                     <p>Have not any account? <a href="signup.html">Register Now</a></p>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@
 
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{ route('add.property') }}" class="btn btn-inverse-info">Add Properties</a>
+            <a href="{{ route('add.agent') }}" class="btn btn-inverse-info">Add Agent</a>
         </ol>
     </nav>
 
@@ -13,7 +13,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Properties All</h6>
+                    <h6 class="card-title">Agent All</h6>
                     <div class="table-responsive">
                     <table id="dataTableExample" class="table">
                         <thead>
@@ -21,36 +21,29 @@
                             <th>Sl</th>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>P Type</th>
-                            <th>Status Type</th>
-                            <th>City</th>
-                            <th>Code</th>
+                            <th>Role</th>
                             <th>Status</th>
+                            <th>Change</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($property as $key => $item)
+                            @foreach($all_agent as $key => $item)
                             <tr>
                             <td>{{ $key+1 }}</td>
-                            <td><img src="{{ asset('upload/property/thumbnail') }}/{{$item->property_thumbnail}}" style="width: 74px;height: 50px;">
+                            <td><img src="{{ (!empty($item->photo)) ? url('upload/agent_photos/'.$item->photo) : url('upload/no_image.jpg') }}" style="width: 70px;height: 70px;">
                             </td>
-                            <td>{{ $item->property_name }}</td>
-                            <td>{{ $item['relation_to_type']['type_name'] }}</td>
-                            <td>{{ $item->property_status }}</td>
-                            <td>{{ $item->city }}</td>
-                            <td>{{ $item->property_code }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->role }}</td>
                             <td>
-                                @if ($item->status == 1)
+                                @if ($item->status == 'active')
                                 <span class="badge rounded-pill bg-success">Active</span>
                                 @else
                                 <span class="badge rounded-pill bg-danger">Inactive</span>
                                 @endif
                             </td>
+                            <td>Change</td>
                             <td>
-                                <a href="{{ route('details.property', $item->id) }}" class="btn btn-inverse-info" title="Details">
-                                    <i data-feather="eye"></i>
-                                </a>
                                 <a href="{{ route('edit.property', $item->id) }}" class="btn btn-inverse-warning" title="Edit">
                                     <i data-feather="edit"></i>
                                 </a>

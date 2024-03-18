@@ -97,4 +97,56 @@ class AdminController extends Controller
         }
 
     }
+    // Agent User All Method
+    public function AllAgent()
+    {
+        $all_agent = User::where('role','agent')->get();
+        return view('backend.agentUser.AllAgent', compact('all_agent'));
+    }
+
+    public function AddAgent()
+    {
+        return view('backend.agentUser.AddAgent');
+    }
+
+    // public function StoreAmenities(Request $request)
+    // {
+    //     Amenities::insert([
+    //         'amenities_name'=>$request->amenities_name,
+    //     ]);
+    //     $notification = array(
+    //         'message'=>'Amenities Created Successfully',
+    //         'alert-type'=>'success',
+    //     );
+    //     return redirect()->route('all.amenities')->with($notification);
+    // }
+
+    // public function EditAmenities($id)
+    // {
+    //     $amenities = Amenities::findOrFail($id);
+    //     return view('backend.amenities.EditAmenities', compact('amenities'));
+    // }
+
+    // public function UpdateAmenities(Request $request)
+    // {
+    //     $ame_id = $request->id;
+    //     Amenities::findOrFail($ame_id)->update([
+    //         'amenities_name'=>$request->amenities_name,
+    //     ]);
+    //     $notification = array(
+    //         'message'=>'Amenities Updated Successfully',
+    //         'alert-type'=>'success',
+    //     );
+    //     return redirect()->route('all.amenities')->with($notification);
+    // }
+
+    // public function DeleteAmenities($id)
+    // {
+    //     Amenities::findOrFail($id)->delete();
+    //     $notification = array(
+    //         'message'=>'Amenities Deleted Successfully',
+    //         'alert-type'=>'success',
+    //     );
+    //     return redirect()->back()->with($notification);
+    // }
 }

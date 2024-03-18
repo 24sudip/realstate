@@ -54,14 +54,18 @@ Route::middleware(['auth','role:agent'])->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
     Route::get('/agent/logout', [AgentController::class, 'AgentLogout'])->name('agent.logout');
     Route::get('/agent/profile', [AgentController::class, 'AgentProfile'])->name('agent.profile');
+    Route::post('/agent/profile/store', [AgentController::class, 'AgentProfileStore'])->name('agent.profile.store');
+    Route::get('/agent/change/password', [AgentController::class, 'AgentChangePassword'])->name('agent.change.password');
+    Route::post('/agent/update/password', [AgentController::class, 'AgentUpdatePassword'])->name('agent.update.password');
 });
 
 Route::get('/agent/login', [AgentController::class, 'AgentLogin'])->name('agent.login')->middleware(RedirectIfAuthenticated::class);
 
 Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name('agent.register');
 
-// Type-of-property Routes
+// Admin Group Middleware
 Route::middleware(['auth','role:admin'])->group(function () {
+    // Type-of-property Routes
     Route::controller(PropertyTypeController::class)->group(function () {
         Route::get('/all/type', 'AllType')->name('all.type');
         Route::get('/add/type', 'AddType')->name('add.type');
@@ -70,9 +74,6 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/update/type', 'UpdateType')->name('update.type');
         Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
     });
-});
-
-Route::middleware(['auth','role:admin'])->group(function () {
     // Amenities Routes
     Route::controller(PropertyTypeController::class)->group(function () {
         Route::get('/all/amenities', 'AllAmenities')->name('all.amenities');
@@ -98,6 +99,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
         Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
         Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+    });
+    // Agent Routes from Admin
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/all/agent', 'AllAgent')->name('all.agent');
+        Route::get('/add/agent', 'AddAgent')->name('add.agent');
+        // Route::post('/store/amenities', 'StoreAmenities')->name('store.amenities');
+        // Route::get('/edit/amenities/{id}', 'EditAmenities')->name('edit.amenities');
+        // Route::post('/update/amenities', 'UpdateAmenities')->name('update.amenities');
+        // Route::get('/delete/amenities/{id}', 'DeleteAmenities')->name('delete.amenities');
     });
 });
 
