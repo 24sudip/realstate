@@ -1,9 +1,7 @@
 @extends('admin.AdminDashboard')
 
 @section('admin')
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 <div class="page-content">
     <div class="row profile-body">
         <!-- middle wrapper start -->
@@ -12,28 +10,25 @@
                 <div class="col-md-12 grid-margin">
                     <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">Add Agent</h6>
-                        <form method="POST" action="{{ route('store.agent') }}" class="forms-sample" id="myForm">
+                        <h6 class="card-title">Edit Agent</h6>
+                        <form method="POST" action="{{ route('update.agent') }}" class="forms-sample" id="myForm">
                         @csrf
+                            <input type="hidden" name="id" value="{{ $all_agent->id }}">
                             <div class="form-group mb-3">
                                 <label class="form-label">Agent Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Agent Name">
+                                <input type="text" name="name" class="form-control" value="{{ $all_agent->name }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Agent Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Agent Email">
+                                <input type="email" name="email" class="form-control" value="{{ $all_agent->email }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Agent Phone</label>
-                                <input type="tel" name="phone" class="form-control" placeholder="Agent Phone">
+                                <input type="tel" name="phone" class="form-control" value="{{ $all_agent->phone }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Agent Address</label>
-                                <input type="text" name="address" class="form-control" placeholder="Agent Address">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label">Agent Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Agent Password">
+                                <input type="text" name="address" class="form-control" value="{{ $all_agent->address }}">
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Save Changes</button>
                         </form>

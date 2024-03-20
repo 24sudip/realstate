@@ -109,44 +109,62 @@ class AdminController extends Controller
         return view('backend.agentUser.AddAgent');
     }
 
-    // public function StoreAmenities(Request $request)
-    // {
-    //     Amenities::insert([
-    //         'amenities_name'=>$request->amenities_name,
-    //     ]);
-    //     $notification = array(
-    //         'message'=>'Amenities Created Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->route('all.amenities')->with($notification);
-    // }
+    public function StoreAgent(Request $request)
+    {
+        User::insert([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'password'=>Hash::make($request->password),
+            'role'=>'agent',
+            'status'=>'active',
+        ]);
+        $notification = array(
+            'message'=>'Agent Created Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('all.agent')->with($notification);
+    }
 
-    // public function EditAmenities($id)
-    // {
-    //     $amenities = Amenities::findOrFail($id);
-    //     return view('backend.amenities.EditAmenities', compact('amenities'));
-    // }
+    public function EditAgent($id)
+    {
+        $all_agent = User::findOrFail($id);
+        return view('backend.agentUser.EditAgent', compact('all_agent'));
+    }
 
-    // public function UpdateAmenities(Request $request)
-    // {
-    //     $ame_id = $request->id;
-    //     Amenities::findOrFail($ame_id)->update([
-    //         'amenities_name'=>$request->amenities_name,
-    //     ]);
-    //     $notification = array(
-    //         'message'=>'Amenities Updated Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->route('all.amenities')->with($notification);
-    // }
+    public function UpdateAgent(Request $request)
+    {
+        $user_id = $request->id;
+        User::findOrFail($user_id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+        ]);
+        $notification = array(
+            'message'=>'Agent Updated Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('all.agent')->with($notification);
+    }
 
-    // public function DeleteAmenities($id)
-    // {
-    //     Amenities::findOrFail($id)->delete();
-    //     $notification = array(
-    //         'message'=>'Amenities Deleted Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->back()->with($notification);
-    // }
+    public function DeleteAgent($id)
+    {
+        User::findOrFail($id)->delete();
+        $notification = array(
+            'message'=>'Agent Deleted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+
+        return response()->json(['success'=>'Status Changed Successfully']);
+    }
 }

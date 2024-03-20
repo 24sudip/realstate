@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
+use App\Http\Controllers\Agent\{AgentPropertyController};
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -104,13 +105,34 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/all/agent', 'AllAgent')->name('all.agent');
         Route::get('/add/agent', 'AddAgent')->name('add.agent');
-        // Route::post('/store/amenities', 'StoreAmenities')->name('store.amenities');
-        // Route::get('/edit/amenities/{id}', 'EditAmenities')->name('edit.amenities');
-        // Route::post('/update/amenities', 'UpdateAmenities')->name('update.amenities');
-        // Route::get('/delete/amenities/{id}', 'DeleteAmenities')->name('delete.amenities');
+        Route::post('/store/agent', 'StoreAgent')->name('store.agent');
+        Route::get('/edit/agent/{id}', 'EditAgent')->name('edit.agent');
+        Route::post('/update/agent', 'UpdateAgent')->name('update.agent');
+        Route::get('/delete/agent/{id}', 'DeleteAgent')->name('delete.agent');
+
+        Route::get('/changeStatus', 'changeStatus');
     });
 });
 
+Route::middleware(['auth','role:agent'])->group(function () {
+    // Agent All Property
+    Route::controller(AgentPropertyController::class)->group(function () {
+        Route::get('/agent/all/property', 'AgentAllProperty')->name('agent.all.property');
+        // Route::get('/add/property', 'AddProperty')->name('add.property');
+        // Route::post('/store/property', 'StoreProperty')->name('store.property');
+        // Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
+        // Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
+        // Route::post('/update/property', 'UpdateProperty')->name('update.property');
+        // Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
+        // Route::post('/active/property', 'ActiveProperty')->name('active.property');
+        // Route::post('/update/property/thumbnail', 'UpdatePropertyThumbnail')->name('update.property.thumbnail');
+        // Route::post('/update/property/multiImage', 'UpdatePropertyMultiImage')->name('update.property.multiImage');
+        // Route::get('/delete/property/multiImage/{id}', 'DeletePropertyMultiImage')->name('delete.property.multiImage');
+        // Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
+        // Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
+        // Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+    });
+});
 // Route::middleware(['auth','role:admin'])->group(function () {
 // });
 
