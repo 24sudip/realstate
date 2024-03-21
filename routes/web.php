@@ -118,8 +118,8 @@ Route::middleware(['auth','role:agent'])->group(function () {
     // Agent All Property
     Route::controller(AgentPropertyController::class)->group(function () {
         Route::get('/agent/all/property', 'AgentAllProperty')->name('agent.all.property');
-        // Route::get('/add/property', 'AddProperty')->name('add.property');
-        // Route::post('/store/property', 'StoreProperty')->name('store.property');
+        Route::get('/agent/add/property', 'AgentAddProperty')->name('agent.add.property');
+        Route::post('/agent/store/property', 'AgentStoreProperty')->name('agent.store.property');
         // Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
         // Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
         // Route::post('/update/property', 'UpdateProperty')->name('update.property');
