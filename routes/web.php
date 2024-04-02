@@ -121,13 +121,13 @@ Route::middleware(['auth','role:agent'])->group(function () {
         Route::get('/agent/add/property', 'AgentAddProperty')->name('agent.add.property');
         Route::post('/agent/store/property', 'AgentStoreProperty')->name('agent.store.property');
         // Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
-        // Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
-        // Route::post('/update/property', 'UpdateProperty')->name('update.property');
+        Route::get('/agent/edit/property/{id}', 'AgentEditProperty')->name('agent.edit.property');
+        Route::post('/agent/update/property', 'AgentUpdateProperty')->name('agent.update.property');
         // Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
         // Route::post('/active/property', 'ActiveProperty')->name('active.property');
-        // Route::post('/update/property/thumbnail', 'UpdatePropertyThumbnail')->name('update.property.thumbnail');
-        // Route::post('/update/property/multiImage', 'UpdatePropertyMultiImage')->name('update.property.multiImage');
-        // Route::get('/delete/property/multiImage/{id}', 'DeletePropertyMultiImage')->name('delete.property.multiImage');
+        Route::post('/agent/update/property/thumbnail', 'AgentUpdatePropertyThumbnail')->name('agent.update.property.thumbnail');
+        Route::post('/agent/update/property/multiImage', 'AgentUpdatePropertyMultiImage')->name('agent.update.property.multiImage');
+        Route::get('/agent/delete/property/multiImage/{id}', 'AgentDeletePropertyMultiImage')->name('agent.delete.property.multiImage');
         // Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
         // Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
         // Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
