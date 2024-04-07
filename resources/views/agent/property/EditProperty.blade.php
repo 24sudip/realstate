@@ -165,7 +165,7 @@
                                             <label class="form-label">Property Amenities</label>
                                             <select name="amenities_id[]" class="js-example-basic-multiple form-select" multiple="multiple" data-width="100%">
                                                 @foreach($amenities as $ameni)
-                                                <option value="{{ $ameni->id }}" {{ (in_array($ameni->id,$property_amenities)) ? 'selected' : '' }}>{{ $ameni->amenities_name }}</option>
+                                                <option value="{{ $ameni->amenities_name }}" {{ (in_array($ameni->amenities_name,$property_amenities)) ? 'selected' : '' }}>{{ $ameni->amenities_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -296,7 +296,7 @@
 									</table>
 								</div>
                             </form>
-                            <form method="POST" action="{{ route('store.new.multiImage') }}" id="myForm" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('agent.store.new.multiImage') }}" id="myForm" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="image_id" value="{{ $property->id }}">
                                 <table class="table table-striped">
@@ -331,7 +331,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Edit Property Facility</h6>
-                            <form method="POST" action="{{ route('update.property.facilities') }}" id="myForm" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('agent.update.property.facilities') }}" id="myForm" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $property->id }}">
                                 @foreach($facilities as $item)

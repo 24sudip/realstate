@@ -1,6 +1,6 @@
-@extends('admin.AdminDashboard')
+@extends('agent.AgentDashboard')
 
-@section('admin')
+@section('agent')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <div class="page-content">
     <div class="row">
@@ -146,19 +146,6 @@
                             </tbody>
                         </table>
                         <br>
-                        @if ($property->status == 1)
-                        <form method="POST" action="{{ route('inactive.property') }}">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $property->id }}">
-                            <button type="submit" class="btn btn-primary">Inactive</button>
-                        </form>
-                        @else
-                        <form method="POST" action="{{ route('active.property') }}">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $property->id }}">
-                            <button type="submit" class="btn btn-primary">Active</button>
-                        </form>
-                        @endif
                     </div>
                 </div>
             </div>

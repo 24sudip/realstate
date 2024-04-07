@@ -119,20 +119,19 @@ class AgentPropertyController extends Controller
         return redirect()->route('agent.all.property')->with($notification);
     }
 
-    // public function DetailsProperty($id)
-    // {
-    //     $facilities = Facility::where('property_id',$id)->get();
-    //     $property = Property::findOrFail($id);
-    //     $amen_type = $property->amenities_id;
-    //     $property_amenities = explode(',',$amen_type);
+    public function AgentDetailsProperty($id)
+    {
+        $facilities = Facility::where('property_id',$id)->get();
+        $property = Property::findOrFail($id);
+        $amen_type = $property->amenities_id;
+        $property_amenities = explode(',',$amen_type);
 
-    //     $multi_image = MultiImage::where('property_id',$id)->get();
+        $multi_image = MultiImage::where('property_id',$id)->get();
 
-    //     $property_type = PropertyType::latest()->get();
-    //     $amenities = Amenities::latest()->get();
-    //     $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
-    //     return view('backend.property.DetailsProperty', compact('property','property_type','amenities','activeAgent','property_amenities','multi_image','facilities'));
-    // }
+        $property_type = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+        return view('agent.property.DetailsProperty', compact('property','property_type','amenities','property_amenities','multi_image','facilities'));
+    }
 
     public function AgentEditProperty($id)
     {
@@ -263,99 +262,77 @@ class AgentPropertyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    // public function StoreNewMultiImage(Request $request)
-    // {
-    //     $new_multi = $request->image_id;
-    //     $image = $request->file('multi_img');
-    //     $manager = new ImageManager(new Driver());
-    //     $img_extension = $image->getClientOriginalExtension();
-    //     $new_name = hexdec(uniqid()).".".$img_extension;
-    //     $img = $manager->read($image)->resize(770,520);
-    //     if ($img_extension == "png") {
-    //         $img->toPng(80)->save(base_path('public/upload/property/multi-image/'.$new_name));
-    //     } else {
-    //         $img->toJpeg(80)->save(base_path('public/upload/property/multi-image/'.$new_name));
-    //     }
-    //     MultiImage::insert([
-    //         'property_id'=>$new_multi,
-    //         'photo_name'=>$new_name,
-    //         'created_at'=>now(),
-    //     ]);
-    //     $notification = array(
-    //         'message'=>'Property Multi-Image Added Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->back()->with($notification);
-    // }
+    public function AgentStoreNewMultiImage(Request $request)
+    {
+        $new_multi = $request->image_id;
+        $image = $request->file('multi_img');
+        $manager = new ImageManager(new Driver());
+        $img_extension = $image->getClientOriginalExtension();
+        $new_name = hexdec(uniqid()).".".$img_extension;
+        $img = $manager->read($image)->resize(770,520);
+        if ($img_extension == "png") {
+            $img->toPng(80)->save(base_path('public/upload/property/multi-image/'.$new_name));
+        } else {
+            $img->toJpeg(80)->save(base_path('public/upload/property/multi-image/'.$new_name));
+        }
+        MultiImage::insert([
+            'property_id'=>$new_multi,
+            'photo_name'=>$new_name,
+            'created_at'=>now(),
+        ]);
+        $notification = array(
+            'message'=>'Property Multi-Image Added Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
 
-    // public function UpdatePropertyFacilities(Request $request)
-    // {
-    //     $p_id = $request->id;
-    //     if ($request->facility_name == NULL) {
-    //         return redirect()->back();
-    //     } else {
-    //         Facility::where('property_id',$p_id)->delete();
-    //         $facilities = Count($request->facility_name);
-    //         for ($i=0; $i < $facilities; $i++) {
-    //             $f_count = new Facility();
-    //             $f_count->property_id = $p_id;
-    //             $f_count->facility_name = $request->facility_name[$i];
-    //             $f_count->distance = $request->distance[$i];
-    //             $f_count->save();
-    //         }
-    //     }
-    //     $notification = array(
-    //         'message'=>'Property Facility Updated Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->back()->with($notification);
-    // }
+    public function AgentUpdatePropertyFacilities(Request $request)
+    {
+        $p_id = $request->id;
+        if ($request->facility_name == NULL) {
+            return redirect()->back();
+        } else {
+            Facility::where('property_id',$p_id)->delete();
+            $facilities = Count($request->facility_name);
+            for ($i=0; $i < $facilities; $i++) {
+                $f_count = new Facility();
+                $f_count->property_id = $p_id;
+                $f_count->facility_name = $request->facility_name[$i];
+                $f_count->distance = $request->distance[$i];
+                $f_count->save();
+            }
+        }
+        $notification = array(
+            'message'=>'Property Facility Updated Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
 
-    // public function DeleteProperty($id)
-    // {
-    //     $property = Property::findOrFail($id);
-    //     unlink(public_path('upload/property/thumbnail/'.$property->property_thumbnail));
-    //     Property::findOrFail($id)->delete();
-    //     $images = MultiImage::where('property_id',$id)->get();
-    //     foreach ($images as $image) {
-    //         unlink(public_path('upload/property/multi-image/'.$image->photo_name));
-    //     }
-    //     MultiImage::where('property_id',$id)->delete();
-    //     $facilitiesData = Facility::where('property_id',$id)->get();
-    //     foreach ($facilitiesData as $item) {
-    //         $item->facility_name;
-    //     }
-    //     Facility::where('property_id',$id)->delete();
-    //     $notification = array(
-    //         'message'=>'Property Deleted Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->back()->with($notification);
-    // }
+    public function AgentDeleteProperty($id)
+    {
+        $property = Property::findOrFail($id);
+        unlink(public_path('upload/property/thumbnail/'.$property->property_thumbnail));
+        Property::findOrFail($id)->delete();
+        $images = MultiImage::where('property_id',$id)->get();
+        foreach ($images as $image) {
+            unlink(public_path('upload/property/multi-image/'.$image->photo_name));
+        }
+        MultiImage::where('property_id',$id)->delete();
+        $facilitiesData = Facility::where('property_id',$id)->get();
+        foreach ($facilitiesData as $item) {
+            $item->facility_name;
+        }
+        Facility::where('property_id',$id)->delete();
+        $notification = array(
+            'message'=>'Property Deleted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
 
-    // public function InactiveProperty(Request $request)
-    // {
-    //     $p_id = $request->id;
-    //     Property::findOrFail($p_id)->update([
-    //         'status'=>0,
-    //     ]);
-    //     $notification = array(
-    //         'message'=>'Property Inactive Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->route('all.property')->with($notification);
-    // }
-
-    // public function ActiveProperty(Request $request)
-    // {
-    //     $p_id = $request->id;
-    //     Property::findOrFail($p_id)->update([
-    //         'status'=>1,
-    //     ]);
-    //     $notification = array(
-    //         'message'=>'Property Active Successfully',
-    //         'alert-type'=>'success',
-    //     );
-    //     return redirect()->route('all.property')->with($notification);
-    // }
+    public function BuyPackage(){
+        return view('agent.package.BuyPackage');
+    }
 }
