@@ -43,12 +43,6 @@
                     </ul>
                 </div>
             </li> --}}
-            <li class="nav-item">
-                <a href="{{ asset('backend/pages') }}/apps/chat.html" class="nav-link">
-                    <i class="link-icon" data-feather="message-square"></i>
-                    <span class="link-title">Chat</span>
-                </a>
-            </li>
             {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button"
                     aria-expanded="false" aria-controls="uiComponents">
@@ -89,6 +83,12 @@
                 <a href="{{ route('buy.package') }}" class="nav-link">
                     <i class="link-icon" data-feather="calendar"></i>
                     <span class="link-title">Buy Package</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('package.history') }}" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">Package History</span>
                 </a>
             </li>
             <li class="nav-item nav-category">Components</li>

@@ -134,12 +134,11 @@ Route::middleware(['auth','role:agent'])->group(function () {
     // Agent Buy Package Routes
     Route::controller(AgentPropertyController::class)->group(function () {
         Route::get('/buy/package', 'BuyPackage')->name('buy.package');
-        // Route::get('/add/agent', 'AddAgent')->name('add.agent');
-        // Route::post('/store/agent', 'StoreAgent')->name('store.agent');
-        // Route::get('/edit/agent/{id}', 'EditAgent')->name('edit.agent');
-        // Route::post('/update/agent', 'UpdateAgent')->name('update.agent');
-        // Route::get('/delete/agent/{id}', 'DeleteAgent')->name('delete.agent');
-        // Route::get('/changeStatus', 'changeStatus');
+        Route::get('/buy/business/plan', 'BuyBusinessPlan')->name('buy.business.plan');
+        Route::post('/store/business/plan', 'StoreBusinessPlan')->name('store.business.plan');
+        Route::get('/buy/professional/plan', 'BuyProfessionalPlan')->name('buy.professional.plan');
+        Route::post('/store/professional/plan', 'StoreProfessionalPlan')->name('store.professional.plan');
+        Route::get('/package/history', 'PackageHistory')->name('package.history');
     });
 });
 // Route::middleware(['auth','role:admin'])->group(function () {
