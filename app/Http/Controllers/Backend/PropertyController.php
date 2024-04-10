@@ -9,10 +9,11 @@ use App\Models\MultiImage;
 use App\Models\Facility;
 use App\Models\PropertyType;
 use App\Models\Amenities;
-use App\Models\User;
+use App\Models\{User, PackagePlan};
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PropertyController extends Controller
 {
@@ -357,5 +358,19 @@ class PropertyController extends Controller
             'alert-type'=>'success',
         );
         return redirect()->route('all.property')->with($notification);
+    }
+
+    public function AdminPackageHistory(){
+        $package_history = PackagePlan::latest()->get();
+        return view('backend.package.PackageHistory',compact('package_history'));
+    }
+
+    public function PackageInvoice($id){
+        $package_history = PackagePlan::where('id',$id)->first();
+        $pdf = Pdf::loadView('backend.package.PackageHistoryInvoice', compact('package_history'))->setPaper('a4')->setOption([
+            'tempDir'=> public_path(),
+            'chroot'=> public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
     }
 }

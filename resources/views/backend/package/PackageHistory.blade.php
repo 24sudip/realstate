@@ -1,12 +1,12 @@
 <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
-@extends('agent.AgentDashboard')
+@extends('admin.AdminDashboard')
 
-@section('agent')
+@section('admin')
 <div class="page-content">
 
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{ route('agent.add.property') }}" class="btn btn-inverse-info">Add Properties</a>
+            <a href="{{ route('add.property') }}" class="btn btn-inverse-info">Add Properties</a>
         </ol>
     </nav>
 
@@ -21,6 +21,7 @@
                         <tr>
                             <th>Sl</th>
                             <th>Image</th>
+                            <th>Name</th>
                             <th>Package</th>
                             <th>Invoice</th>
                             <th>Amount</th>
@@ -34,12 +35,13 @@
                             <td>{{ $key+1 }}</td>
                             <td><img src="{{ (!empty($item->relation_to_user->photo)) ? url('upload/agent_photos/'.$item->relation_to_user->photo) : url('upload/no_image.jpg') }}" style="width: 70px;">
                             </td>
+                            <td>{{ $item['relation_to_user']['name'] }}</td>
                             <td>{{ $item->package_name }}</td>
                             <td>{{ $item->invoice }}</td>
                             <td>{{ $item->package_amount }}</td>
                             <td>{{ $item->created_at->format('l d M Y') }}</td>
                             <td>
-                                <a href="{{ route('agent.package.invoice', $item->id) }}" class="btn btn-inverse-warning" title="Download">
+                                <a href="{{ route('package.invoice', $item->id) }}" class="btn btn-inverse-warning" title="Download">
                                     <i data-feather="download"></i>
                                 </a>
                             </td>

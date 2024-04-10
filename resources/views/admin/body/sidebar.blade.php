@@ -74,9 +74,9 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('backend/pages') }}/apps/chat.html" class="nav-link">
+                <a href="{{ route('admin.package.history') }}" class="nav-link">
                     <i class="link-icon" data-feather="message-square"></i>
-                    <span class="link-title">Chat</span>
+                    <span class="link-title">Package History</span>
                 </a>
             </li>
             <li class="nav-item">

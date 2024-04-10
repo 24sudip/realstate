@@ -100,6 +100,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
         Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
         Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+        Route::get('/admin/package/history', 'AdminPackageHistory')->name('admin.package.history');
+        Route::get('/package/invoice/{id}', 'PackageInvoice')->name('package.invoice');
     });
     // Agent Routes from Admin
     Route::controller(AdminController::class)->group(function () {
@@ -139,6 +141,7 @@ Route::middleware(['auth','role:agent'])->group(function () {
         Route::get('/buy/professional/plan', 'BuyProfessionalPlan')->name('buy.professional.plan');
         Route::post('/store/professional/plan', 'StoreProfessionalPlan')->name('store.professional.plan');
         Route::get('/package/history', 'PackageHistory')->name('package.history');
+        Route::get('/agent/package/invoice/{id}', 'AgentPackageInvoice')->name('agent.package.invoice');
     });
 });
 // Route::middleware(['auth','role:admin'])->group(function () {
