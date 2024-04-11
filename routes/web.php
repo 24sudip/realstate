@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
-use App\Http\Controllers\Agent\{AgentPropertyController};
+use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -146,5 +147,8 @@ Route::middleware(['auth','role:agent'])->group(function () {
 });
 // Route::middleware(['auth','role:admin'])->group(function () {
 // });
+
+// Frontend Property Detail Route
+Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']);
 
 require __DIR__.'/auth.php';
