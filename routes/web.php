@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
 use App\Http\Controllers\Agent\AgentPropertyController;
-use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\{IndexController, WishlistController};
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -37,6 +37,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+
+    // User Wishlist Route
+    Route::controller(WishlistController::class)->group(function () {
+        Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
+        Route::get('/get-wishlist-property', 'GetWishlistProperty');
+        // Route::get('/add/type', 'AddType')->name('add.type');
+        // Route::post('/store/type', 'StoreType')->name('store.type');
+        // Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
+        // Route::post('/update/type', 'UpdateType')->name('update.type');
+        // Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
+    });
 });
 
 // Admin Group Middleware
@@ -150,5 +161,8 @@ Route::middleware(['auth','role:agent'])->group(function () {
 
 // Frontend Property Detail Route
 Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']);
+
+// Wishlist Add Route
+Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddToWishlist']);
 
 require __DIR__.'/auth.php';
