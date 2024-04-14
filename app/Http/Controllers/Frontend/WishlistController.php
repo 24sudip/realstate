@@ -39,8 +39,13 @@ class WishlistController extends Controller
     }
 
     public function GetWishlistProperty(){
-        $wishlist = Wishlist::with('property')->where('user_id', Auth::id())->latest()->get();
-        $wishQty = $wishlist->count();
+        $wishlist = Wishlist::with('relation_to_property')->where('user_id', Auth::id())->latest()->get();
+        $wishQty = wishlist::count();
         return response()->json(['wishlist'=>$wishlist, 'wishQty'=>$wishQty]);
+    }
+
+    public function wishlistRemove($id){
+        Wishlist::where('user_id', Auth::id())->where('id',$id)->delete();
+        return response()->json(['success'=>'Successfully Property Removed']);
     }
 }

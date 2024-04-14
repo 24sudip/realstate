@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
 use App\Http\Controllers\Agent\AgentPropertyController;
-use App\Http\Controllers\Frontend\{IndexController, WishlistController};
+use App\Http\Controllers\Frontend\{IndexController, WishlistController, CompareController};
 use App\Http\Controllers\{AgentController, UserController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -42,11 +42,13 @@ Route::middleware('auth')->group(function () {
     Route::controller(WishlistController::class)->group(function () {
         Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
         Route::get('/get-wishlist-property', 'GetWishlistProperty');
-        // Route::get('/add/type', 'AddType')->name('add.type');
-        // Route::post('/store/type', 'StoreType')->name('store.type');
-        // Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
-        // Route::post('/update/type', 'UpdateType')->name('update.type');
-        // Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
+        Route::get('/wishlist-remove/{id}', 'wishlistRemove');
+    });
+    // User Compare Route
+    Route::controller(CompareController::class)->group(function () {
+        Route::get('/user/compare', 'UserCompare')->name('user.compare');
+        Route::get('/get-wishlist-property', 'GetWishlistProperty');
+        Route::get('/wishlist-remove/{id}', 'wishlistRemove');
     });
 });
 
@@ -164,5 +166,8 @@ Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDe
 
 // Wishlist Add Route
 Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddToWishlist']);
+
+// Compare Add Route
+Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
 
 require __DIR__.'/auth.php';
