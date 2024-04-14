@@ -352,5 +352,61 @@
             </div>
         </div>
     </div>
+    <th>
+        <figure class="image-box"><img src="{{ asset('frontend_assets') }}/images/resource/table-img-2.jpg" alt=""></figure>
+        <div class="title">Contemporary Apartment</div>
+        <div class="price">$45,000.00</div>
+    </th>
+    <th>
+        <figure class="image-box"><img src="{{ asset('frontend_assets') }}/images/resource/table-img-3.jpg" alt=""></figure>
+        <div class="title">Luxury Villa With Pool</div>
+        <div class="price">$45,000.00</div>
+    </th>
+    <td>
+        <p>Los Angeles</p>
+    </td>
+    <td>
+        <p>San Diego</p>
+    </td>
+        <td>
+        <p>2010 Sq Ft</p>
+    </td>
+    <td>
+        <p>2140 Sq Ft</p>
+    </td>
+    <td>
+        <p>3</p>
+    </td>
+    <td>
+        <p>4</p>
+    </td>
+    <tr>
+        <td>
+            <p>Year of Build</p>
+        </td>
+        <td>
+            <p>2018</p>
+        </td>
+        <td>
+            <p>2020</p>
+        </td>
+        <td>
+            <p>2019</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Air Conditioning</p>
+        </td>
+        <td>
+            <p><i class="yes fas fa-check"></i></p>
+        </td>
+        <td>
+            <p><i class="no fas fa-times"></i></p>
+        </td>
+        <td>
+            <p><i class="no fas fa-times"></i></p>
+        </td>
+    </tr>
 </body>
 </html>

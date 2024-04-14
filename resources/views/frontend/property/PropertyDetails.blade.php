@@ -248,6 +248,29 @@
                                 @endif
                             </div>
                             <div class="form-inner">
+                                @auth()
+                                    @php
+                                        $id = Auth::user()->id;
+                                        $user_data = App\Models\User::find($id);
+                                    @endphp
+                                <form action="property-details.html" method="post" class="default-form">
+                                    <div class="form-group">
+                                        <input type="text" name="name" value="{{ $user_data->name }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" value="{{ $user_data->email }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="phone" value="{{ $user_data->phone }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="message" placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="form-group message-btn">
+                                        <button type="submit" class="theme-btn btn-one">Send Message</button>
+                                    </div>
+                                </form>
+                                @else
                                 <form action="property-details.html" method="post" class="default-form">
                                     <div class="form-group">
                                         <input type="text" name="name" placeholder="Your name" required="">
@@ -265,6 +288,7 @@
                                         <button type="submit" class="theme-btn btn-one">Send Message</button>
                                     </div>
                                 </form>
+                                @endauth
                             </div>
                         </div>
                         <div class="calculator-widget sidebar-widget">

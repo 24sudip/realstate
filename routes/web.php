@@ -47,8 +47,8 @@ Route::middleware('auth')->group(function () {
     // User Compare Route
     Route::controller(CompareController::class)->group(function () {
         Route::get('/user/compare', 'UserCompare')->name('user.compare');
-        Route::get('/get-wishlist-property', 'GetWishlistProperty');
-        Route::get('/wishlist-remove/{id}', 'wishlistRemove');
+        Route::get('/get-compare-property', 'GetCompareProperty');
+        Route::get('/compare-remove/{id}', 'CompareRemove');
     });
 });
 
