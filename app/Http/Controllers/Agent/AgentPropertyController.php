@@ -8,7 +8,7 @@ use App\Models\Property;
 use App\Models\MultiImage;
 use App\Models\Facility;
 use App\Models\PropertyType;
-use App\Models\Amenities;
+use App\Models\{Amenities, PropertyMessage};
 use App\Models\{User, PackagePlan};
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -424,5 +424,11 @@ class AgentPropertyController extends Controller
             'chroot'=> public_path(),
         ]);
         return $pdf->download('invoice.pdf');
+    }
+
+    public function AgentPropertyMessage(){
+        $id = Auth::user()->id;
+        $user_msg = PropertyMessage::where('agent_id',$id)->get();
+        return view('agent.message.AllMessage',compact('user_msg'));
     }
 }

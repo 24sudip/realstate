@@ -253,15 +253,22 @@
                                         $id = Auth::user()->id;
                                         $user_data = App\Models\User::find($id);
                                     @endphp
-                                <form action="property-details.html" method="post" class="default-form">
+                                <form action="{{ route('property.message') }}" method="post" class="default-form">
+                                    @csrf
+                                    <input type="hidden" name="property_id" value="{{ $property->id }}">
+                                    @if ($property->agent_id == Null)
+                                    <input type="hidden" name="agent_id" value="">
+                                    @else
+                                    <input type="hidden" name="agent_id" value="{{ $property->agent_id }}">
+                                    @endif
                                     <div class="form-group">
-                                        <input type="text" name="name" value="{{ $user_data->name }}">
+                                        <input type="text" name="msg_name" placeholder="Your Name" value="{{ $user_data->name }}">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" value="{{ $user_data->email }}">
+                                        <input type="email" name="msg_email" placeholder="Your Email" value="{{ $user_data->email }}">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" value="{{ $user_data->phone }}">
+                                        <input type="tel" name="msg_phone" placeholder="Your Phone" value="{{ $user_data->phone }}">
                                     </div>
                                     <div class="form-group">
                                         <textarea name="message" placeholder="Message"></textarea>
@@ -271,15 +278,22 @@
                                     </div>
                                 </form>
                                 @else
-                                <form action="property-details.html" method="post" class="default-form">
+                                <form action="{{ route('property.message') }}" method="post" class="default-form">
+                                    @csrf
+                                    <input type="hidden" name="property_id" value="{{ $property->id }}">
+                                    @if ($property->agent_id == Null)
+                                    <input type="hidden" name="agent_id" value="">
+                                    @else
+                                    <input type="hidden" name="agent_id" value="{{ $property->agent_id }}">
+                                    @endif
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Your name" required="">
+                                        <input type="text" name="msg_name" placeholder="Your name" required="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <input type="email" name="msg_email" placeholder="Your Email" required="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" placeholder="Phone" required="">
+                                        <input type="text" name="msg_phone" placeholder="Phone" required="">
                                     </div>
                                     <div class="form-group">
                                         <textarea name="message" placeholder="Message"></textarea>

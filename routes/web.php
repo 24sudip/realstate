@@ -146,6 +146,7 @@ Route::middleware(['auth','role:agent'])->group(function () {
         Route::post('/agent/store/new/multiImage', 'AgentStoreNewMultiImage')->name('agent.store.new.multiImage');
         Route::post('/agent/update/property/facilities', 'AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
         Route::get('/agent/delete/property/{id}', 'AgentDeleteProperty')->name('agent.delete.property');
+        Route::get('/agent/property/message', 'AgentPropertyMessage')->name('agent.property.message');
     });
     // Agent Buy Package Routes
     Route::controller(AgentPropertyController::class)->group(function () {
@@ -169,5 +170,8 @@ Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddTo
 
 // Compare Add Route
 Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
+
+// Send Message From Property Detail Page
+Route::post('/property/message', [IndexController::class, 'PropertyMessage'])->name('property.message');
 
 require __DIR__.'/auth.php';
