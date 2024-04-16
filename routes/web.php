@@ -147,6 +147,7 @@ Route::middleware(['auth','role:agent'])->group(function () {
         Route::post('/agent/update/property/facilities', 'AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
         Route::get('/agent/delete/property/{id}', 'AgentDeleteProperty')->name('agent.delete.property');
         Route::get('/agent/property/message', 'AgentPropertyMessage')->name('agent.property.message');
+        Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');
     });
     // Agent Buy Package Routes
     Route::controller(AgentPropertyController::class)->group(function () {
