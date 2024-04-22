@@ -55,4 +55,10 @@ class IndexController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function AgentDetails($id){
+        $agent = User::findOrFail($id);
+        $property = Property::where('agent_id',$id)->get();
+        return view('frontend.agent.AgentDetails',compact('agent','property'));
+    }
 }

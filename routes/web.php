@@ -116,6 +116,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
         Route::get('/admin/package/history', 'AdminPackageHistory')->name('admin.package.history');
         Route::get('/package/invoice/{id}', 'PackageInvoice')->name('package.invoice');
+        Route::get('/admin/property/message', 'AdminPropertyMessage')->name('admin.property.message');
     });
     // Agent Routes from Admin
     Route::controller(AdminController::class)->group(function () {
@@ -174,5 +175,8 @@ Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCo
 
 // Send Message From Property Detail Page
 Route::post('/property/message', [IndexController::class, 'PropertyMessage'])->name('property.message');
+
+// Agent Details Page in Frontend
+Route::get('/agent/details/{id}', [IndexController::class, 'AgentDetails'])->name('agent.details');
 
 require __DIR__.'/auth.php';

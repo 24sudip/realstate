@@ -8,7 +8,7 @@ use App\Models\Property;
 use App\Models\MultiImage;
 use App\Models\Facility;
 use App\Models\PropertyType;
-use App\Models\Amenities;
+use App\Models\{Amenities, PropertyMessage};
 use App\Models\{User, PackagePlan};
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -373,4 +373,10 @@ class PropertyController extends Controller
         ]);
         return $pdf->download('invoice.pdf');
     }
+
+    public function AdminPropertyMessage(){
+        $user_msg = PropertyMessage::latest()->get();
+        return view('backend.message.AllMessage',compact('user_msg'));
+    }
+
 }
