@@ -173,10 +173,22 @@ Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddTo
 // Compare Add Route
 Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
 
-// Send Message From Property Detail Page
+// Send Message From Property Details Page
 Route::post('/property/message', [IndexController::class, 'PropertyMessage'])->name('property.message');
 
 // Agent Details Page in Frontend
 Route::get('/agent/details/{id}', [IndexController::class, 'AgentDetails'])->name('agent.details');
+
+// Send Message From Agent Details Page
+Route::post('/agent/details/message', [IndexController::class, 'AgentDetailsMessage'])->name('agent.details.message');
+
+// Get All Rent Property
+Route::get('/rent/property', [IndexController::class, 'RentProperty'])->name('rent.property');
+
+// Get All Buy Property
+Route::get('/buy/property', [IndexController::class, 'BuyProperty'])->name('buy.property');
+
+// Get All Property Type Data
+Route::get('/property/type/{id}', [IndexController::class, 'PropertyType'])->name('property.type');
 
 require __DIR__.'/auth.php';
