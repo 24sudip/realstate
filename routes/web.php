@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController};
+use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController, StateController};
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\{IndexController, WishlistController, CompareController};
 use App\Http\Controllers\{AgentController, UserController};
@@ -128,6 +128,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::get('/delete/agent/{id}', 'DeleteAgent')->name('delete.agent');
 
         Route::get('/changeStatus', 'changeStatus');
+    });
+    // State All Route
+    Route::controller(StateController::class)->group(function () {
+        Route::get('/all/state', 'AllState')->name('all.state');
+        Route::get('/add/state', 'AddState')->name('add.state');
+        Route::post('/store/state', 'StoreState')->name('store.state');
+        Route::get('/edit/state/{id}', 'EditState')->name('edit.state');
+        Route::post('/update/state', 'UpdateState')->name('update.state');
+        Route::get('/delete/state/{id}', 'DeleteState')->name('delete.state');
     });
 });
 
