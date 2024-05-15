@@ -200,4 +200,13 @@ Route::get('/buy/property', [IndexController::class, 'BuyProperty'])->name('buy.
 // Get All Property Type Data
 Route::get('/property/type/{id}', [IndexController::class, 'PropertyType'])->name('property.type');
 
+// Get State Details Data
+Route::get('/state/details/{id}', [IndexController::class, 'StateDetails'])->name('state.details');
+
+// Home Page Buy Search Option
+Route::post('/buy/property/search', [IndexController::class, 'BuyPropertySearch'])->name('buy.property.search');
+
+// Home Page Rent Search Option
+Route::post('/rent/property/search', [IndexController::class, 'RentPropertySearch'])->name('rent.property.search');
+
 require __DIR__.'/auth.php';

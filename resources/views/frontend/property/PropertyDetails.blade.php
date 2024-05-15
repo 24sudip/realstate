@@ -114,7 +114,7 @@
                             </div>
                             <ul class="info clearfix">
                                 <li><span>Address:</span> {{ $property->address }}</li>
-                                <li><span>State/county:</span> {{ $property->state }}</li>
+                                <li><span>State/county:</span> {{ $property['relation_to_state']['state_name'] }}</li>
                                 <li><span>Neighborhood:</span> {{ $property->neighborhood }}</li>
                                 <li><span>Zip/Postal Code:</span> {{ $property->postal_code }}</li>
                                 <li><span>City:</span> {{ $property->city }}</li>

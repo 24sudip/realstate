@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\MultiImage;
 use App\Models\Facility;
-use App\Models\PropertyType;
+use App\Models\{PropertyType, State};
 use App\Models\{Amenities, PropertyMessage};
 use App\Models\{User, PackagePlan};
 use Illuminate\Support\Facades\Auth;
@@ -105,5 +105,24 @@ class IndexController extends Controller
         $property = Property::where('status','1')->where('ptype_id',$id)->get();
         $p_bread = PropertyType::where('id',$id)->first();
         return view('frontend.property.PropertyType',compact('property','p_bread'));
+    }
+
+    public function StateDetails($id) {
+        $property = Property::where('status','1')->where('state',$id)->get();
+        $b_state = State::where('id',$id)->first();
+        return view('frontend.property.StateProperty',compact('property','b_state'));
+    }
+
+    public function BuyPropertySearch(Request $request){
+        $request->validate(['search'=>'required']);
+        $item = $request->search;
+        $s_state = $request->state;
+        $s_type = $request->ptype_id;
+        $property = Property::where('property_name','like','%'.$item.'%')->where('property_status','buy')->with('relation_to_type','relation_to_state')->whereHas('relation_to_state', function($q) use ($s_state){
+            $q->where('state_name','like','%'.$s_state.'%');
+        })->whereHas('relation_to_type', function($q) use ($s_type){
+            $q->where('type_name','like','%'.$s_type.'%');
+        })->get();
+        return view('frontend.property.PropertySearch',compact('property'));
     }
 }
