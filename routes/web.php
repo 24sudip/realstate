@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController, StateController};
+use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController, StateController, TestimonialController};
+use App\Http\Controllers\Backend\{BlogController};
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\{IndexController, WishlistController, CompareController};
 use App\Http\Controllers\{AgentController, UserController};
@@ -138,6 +139,32 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/update/state', 'UpdateState')->name('update.state');
         Route::get('/delete/state/{id}', 'DeleteState')->name('delete.state');
     });
+    // Testimonial All Route
+    Route::controller(TestimonialController::class)->group(function () {
+        Route::get('/all/testimonials', 'AllTestimonials')->name('all.testimonials');
+        Route::get('/add/testimonial', 'AddTestimonial')->name('add.testimonial');
+        Route::post('/store/testimonial', 'StoreTestimonial')->name('store.testimonial');
+        Route::get('/edit/testimonial/{id}', 'EditTestimonial')->name('edit.testimonial');
+        Route::post('/update/testimonial', 'UpdateTestimonial')->name('update.testimonial');
+        Route::get('/delete/testimonial/{id}', 'DeleteTestimonial')->name('delete.testimonial');
+    });
+    // Blog Category All Route
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category');
+        Route::post('/store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
+        Route::get('/blog/category/{id}', 'EditBlogCategory');
+        Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+        Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
+    });
+    // Testimonial All Route
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/all/post', 'AllPost')->name('all.post');
+        // Route::get('/add/testimonial', 'AddTestimonial')->name('add.testimonial');
+        // Route::post('/store/testimonial', 'StoreTestimonial')->name('store.testimonial');
+        // Route::get('/edit/testimonial/{id}', 'EditTestimonial')->name('edit.testimonial');
+        // Route::post('/update/testimonial', 'UpdateTestimonial')->name('update.testimonial');
+        // Route::get('/delete/testimonial/{id}', 'DeleteTestimonial')->name('delete.testimonial');
+    });
 });
 
 Route::middleware(['auth','role:agent'])->group(function () {
@@ -208,5 +235,8 @@ Route::post('/buy/property/search', [IndexController::class, 'BuyPropertySearch'
 
 // Home Page Rent Search Option
 Route::post('/rent/property/search', [IndexController::class, 'RentPropertySearch'])->name('rent.property.search');
+
+// All Property Search Option
+Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'])->name('all.property.search');
 
 require __DIR__.'/auth.php';

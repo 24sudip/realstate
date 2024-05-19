@@ -126,14 +126,16 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button"
                     aria-expanded="false" aria-controls="tables">
                     <i class="link-icon" data-feather="layout"></i>
-                    <span class="link-title">Table</span>
+                    <span class="link-title">Testimonials Manage</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="tables">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/tables/basic-table.html"
-                                class="nav-link">Basic Tables</a>
+                            <a href="{{ route('all.testimonials') }}" class="nav-link">All Testimonials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('add.testimonial') }}" class="nav-link">Add Testimonials</a>
                         </li>
                     </ul>
                 </div>
@@ -142,14 +144,13 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button"
                     aria-expanded="false" aria-controls="icons">
                     <i class="link-icon" data-feather="smile"></i>
-                    <span class="link-title">Icons</span>
+                    <span class="link-title">Blog Category</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="icons">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/icons/feather-icons.html"
-                                class="nav-link">Feather Icons</a>
+                            <a href="{{ route('all.blog.category') }}" class="nav-link">All Category</a>
                         </li>
                     </ul>
                 </div>
@@ -160,14 +161,16 @@
                     role="button" aria-expanded="false"
                     aria-controls="general-pages">
                     <i class="link-icon" data-feather="book"></i>
-                    <span class="link-title">Special pages</span>
+                    <span class="link-title">Blog Post</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="general-pages">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/general/blank-page.html"
-                                class="nav-link">Blank page</a>
+                            <a href="{{ route('all.post') }}" class="nav-link">All Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ asset('backend/pages') }}" class="nav-link">Add Post</a>
                         </li>
                     </ul>
                 </div>

@@ -125,4 +125,37 @@ class IndexController extends Controller
         })->get();
         return view('frontend.property.PropertySearch',compact('property'));
     }
+
+    public function RentPropertySearch(Request $request){
+        $request->validate(['search'=>'required']);
+        $item = $request->search;
+        $s_state = $request->state;
+        $s_type = $request->ptype_id;
+        $property = Property::where('property_name','like','%'.$item.'%')->where('property_status','rent')->with('relation_to_type','relation_to_state')->whereHas('relation_to_state', function($q) use ($s_state){
+            $q->where('state_name','like','%'.$s_state.'%');
+        })->whereHas('relation_to_type', function($q) use ($s_type){
+            $q->where('type_name','like','%'.$s_type.'%');
+        })->get();
+        return view('frontend.property.PropertySearch',compact('property'));
+    }
+
+    public function AllPropertySearch(Request $request){
+        // $request->validate(['search'=>'required']);
+        $property_status = $request->property_status;
+        $s_state = $request->state;
+        $s_type = $request->ptype_id;
+        $bedrooms = $request->bedrooms;
+        $bathrooms = $request->bathrooms;
+
+        $property = Property::where('status','1')->where('bedrooms',$bedrooms)
+        ->where('bathrooms','like','%'.$bathrooms.'%')
+        ->where('property_status',$property_status)
+        ->with('relation_to_type','relation_to_state')
+        ->whereHas('relation_to_state', function($q) use ($s_state){
+            $q->where('state_name','like','%'.$s_state.'%');
+        })->whereHas('relation_to_type', function($q) use ($s_type){
+            $q->where('type_name','like','%'.$s_type.'%');
+        })->get();
+        return view('frontend.property.PropertySearch',compact('property'));
+    }
 }
