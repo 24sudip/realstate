@@ -159,10 +159,10 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Testimonial All Route
     Route::controller(BlogController::class)->group(function () {
         Route::get('/all/post', 'AllPost')->name('all.post');
-        // Route::get('/add/testimonial', 'AddTestimonial')->name('add.testimonial');
-        // Route::post('/store/testimonial', 'StoreTestimonial')->name('store.testimonial');
-        // Route::get('/edit/testimonial/{id}', 'EditTestimonial')->name('edit.testimonial');
-        // Route::post('/update/testimonial', 'UpdateTestimonial')->name('update.testimonial');
+        Route::get('/add/post', 'AddPost')->name('add.post');
+        Route::post('/store/post', 'StorePost')->name('store.post');
+        Route::get('/edit/post/{id}', 'EditPost')->name('edit.post');
+        Route::post('/update/post', 'UpdatePost')->name('update.post');
         // Route::get('/delete/testimonial/{id}', 'DeleteTestimonial')->name('delete.testimonial');
     });
 });

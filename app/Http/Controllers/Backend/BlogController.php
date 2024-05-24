@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{BlogCategory};
+use App\Models\{BlogCategory, BlogPost, User};
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -55,6 +58,91 @@ class BlogController extends Controller
     }
 
     public function AllPost(){
+        $post = BlogPost::latest()->get();
+        return view('backend.post.AllPost',compact('post'));
+    }
 
+    public function AddPost(){
+        $blog_cat = BlogCategory::latest()->get();
+        return view('backend.post.AddPost',compact('blog_cat'));
+    }
+
+    public function StorePost(Request $request)
+    {
+        if ($request->hasFile('post_image')) {
+            $manager = new ImageManager(new Driver());
+            $img_extension = $request->file('post_image')->getClientOriginalExtension();
+            $new_name = hexdec(uniqid()).".".$img_extension;
+            $img = $manager->read($request->file('post_image'))->resize(370,250);
+            if ($img_extension == "png") {
+                $img->toPng(80)->save(base_path('public/upload/post_images/'.$new_name));
+            } else {
+                $img->toJpeg(80)->save(base_path('public/upload/post_images/'.$new_name));
+            }
+        }
+        BlogPost::insert([
+            'blog_cat_id'=>$request->blog_cat_id,
+            'user_id'=>Auth::user()->id,
+            'post_title'=>$request->post_title,
+            'post_slug'=> strtolower(str_replace(' ','-', $request->post_title)),
+            'short_descp'=>$request->short_descp,
+            'long_descp'=>$request->long_descp,
+            'post_tags'=>$request->post_tags,
+            'post_image'=>$new_name,
+            'created_at'=>now(),
+        ]);
+        $notification = array(
+            'message'=>'BlogPost Created Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('all.post')->with($notification);
+    }
+
+    public function EditPost($id){
+        $post = BlogPost::findOrFail($id);
+        $blog_cat = BlogCategory::latest()->get();
+        return view('backend.post.EditPost', compact('post','blog_cat'));
+    }
+
+    public function UpdatePost(Request $request)
+    {
+        $post_id = $request->id;
+        if ($request->hasFile('post_image')) {
+            $manager = new ImageManager(new Driver());
+            $img_extension = $request->file('post_image')->getClientOriginalExtension();
+            $new_name = hexdec(uniqid()).".".$img_extension;
+            $img = $manager->read($request->file('post_image'))->resize(370,250);
+            if ($img_extension == "png") {
+                $img->toPng(80)->save(base_path('public/upload/post_images/'.$new_name));
+            } else {
+                $img->toJpeg(80)->save(base_path('public/upload/post_images/'.$new_name));
+            }
+
+            BlogPost::findOrFail($post_id)->update([
+                'blog_cat_id'=>$request->blog_cat_id,
+                'user_id'=>Auth::user()->id,
+                'post_title'=>$request->post_title,
+                'post_slug'=> strtolower(str_replace(' ','-', $request->post_title)),
+                'short_descp'=>$request->short_descp,
+                'long_descp'=>$request->long_descp,
+                'post_tags'=>$request->post_tags,
+                'post_image'=>$new_name,
+                'created_at'=>now(),
+            ]);
+            $notification = array(
+                'message'=>'BlogPost Created Successfully',
+                'alert-type'=>'success',
+            );
+            return redirect()->route('all.post')->with($notification);
+        } else {
+            State::findOrFail($state_id)->update([
+                'state_name'=>$request->state_name,
+            ]);
+            $notification = array(
+                'message'=>'State Updated Without Image Successfully',
+                'alert-type'=>'success',
+            );
+            return redirect()->route('all.state')->with($notification);
+        }
     }
 }
