@@ -163,7 +163,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::post('/store/post', 'StorePost')->name('store.post');
         Route::get('/edit/post/{id}', 'EditPost')->name('edit.post');
         Route::post('/update/post', 'UpdatePost')->name('update.post');
-        // Route::get('/delete/testimonial/{id}', 'DeleteTestimonial')->name('delete.testimonial');
+        Route::get('/delete/post/{id}', 'DeletePost')->name('delete.post');
     });
 });
 
@@ -238,5 +238,8 @@ Route::post('/rent/property/search', [IndexController::class, 'RentPropertySearc
 
 // All Property Search Option
 Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'])->name('all.property.search');
+
+// All Property Search Option
+Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
 
 require __DIR__.'/auth.php';

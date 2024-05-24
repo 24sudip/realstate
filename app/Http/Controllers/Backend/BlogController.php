@@ -112,6 +112,9 @@ class BlogController extends Controller
             $img_extension = $request->file('post_image')->getClientOriginalExtension();
             $new_name = hexdec(uniqid()).".".$img_extension;
             $img = $manager->read($request->file('post_image'))->resize(370,250);
+            if (file_exists('upload/post_images/'.BlogPost::find($post_id)->post_image)) {
+                unlink(public_path('upload/post_images/'.BlogPost::find($post_id)->post_image));
+            }
             if ($img_extension == "png") {
                 $img->toPng(80)->save(base_path('public/upload/post_images/'.$new_name));
             } else {
@@ -130,19 +133,46 @@ class BlogController extends Controller
                 'created_at'=>now(),
             ]);
             $notification = array(
-                'message'=>'BlogPost Created Successfully',
+                'message'=>'BlogPost Updated With Image Successfully',
                 'alert-type'=>'success',
             );
             return redirect()->route('all.post')->with($notification);
         } else {
-            State::findOrFail($state_id)->update([
-                'state_name'=>$request->state_name,
+            BlogPost::findOrFail($post_id)->update([
+                'blog_cat_id'=>$request->blog_cat_id,
+                'user_id'=>Auth::user()->id,
+                'post_title'=>$request->post_title,
+                'post_slug'=> strtolower(str_replace(' ','-', $request->post_title)),
+                'short_descp'=>$request->short_descp,
+                'long_descp'=>$request->long_descp,
+                'post_tags'=>$request->post_tags,
+                'created_at'=>now(),
             ]);
             $notification = array(
-                'message'=>'State Updated Without Image Successfully',
+                'message'=>'BlogPost Updated Successfully',
                 'alert-type'=>'success',
             );
-            return redirect()->route('all.state')->with($notification);
+            return redirect()->route('all.post')->with($notification);
         }
+    }
+
+    public function DeletePost($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        $img = $post->post_image;
+        if (file_exists('upload/post_images/'.$img)) {
+            unlink(public_path('upload/post_images/'.$img));
+        }
+        BlogPost::findOrFail($id)->delete();
+        $notification = array(
+            'message'=>'BlogPost Deleted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function BlogDetails($slug){
+        $blog = BlogPost::where('post_slug',$slug)->first();
+        return view('frontend.blog.BlogDetails', compact('blog'));
     }
 }
