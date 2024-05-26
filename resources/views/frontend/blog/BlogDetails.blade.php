@@ -3,17 +3,21 @@
 
 @section('main')
 <!--Page Title-->
-<section class="page-title centred" style="background-image: url(assets/images/background/page-title-5.jpg);">
-    <div class="auto-container">
-        <div class="content-box clearfix">
-            <h1>Blog Details</h1>
-            <ul class="bread-crumb clearfix">
-                <li><a href="index.html">Home</a></li>
-                <li>Blog Details</li>
-            </ul>
+    <section class="page-title-two bg-color-1 centred">
+        <div class="pattern-layer">
+            <div class="pattern-1" style="background-image: url({{ asset('frontend_assets') }}/images/shape/shape-9.png);"></div>
+            <div class="pattern-2" style="background-image: url({{ asset('frontend_assets') }}/images/shape/shape-10.png);"></div>
         </div>
-    </div>
-</section>
+        <div class="auto-container">
+            <div class="content-box clearfix">
+                <h1>{{ $blog->post_title }}</h1>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li>{{ $blog->post_title }}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 <!--End Page Title-->
 
 <!-- sidebar-page-container -->
@@ -25,32 +29,27 @@
                     <div class="news-block-one">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><img src="assets/images/news/news-21.jpg" alt=""></figure>
+                                <figure class="image"><img src="{{ asset('upload/post_images') }}/{{ $blog->post_image }}" alt="post_image"></figure>
                                 <span class="category">Featured</span>
                             </div>
                             <div class="lower-content">
-                                <h3>Including Animation In Your Design System.</h3>
+                                <h3>{{ $blog->post_title }}</h3>
                                 <ul class="post-info clearfix">
                                     <li class="author-box">
-                                        <figure class="author-thumb"><img src="assets/images/news/author-1.jpg" alt=""></figure>
-                                        <h5><a href="blog-details.html">Eva Green</a></h5>
+                                        <figure class="author-thumb"><img src="{{ (!empty($blog->rel_to_user->photo)) ? url('upload/admin_photos/'.$blog->rel_to_user->photo) : url('upload/no_image.jpg') }}" alt="user"></figure>
+                                        <h5><a href="blog-details.html">{{ $blog['rel_to_user']['name'] }}</a></h5>
                                     </li>
-                                    <li>April 10, 2020</li>
+                                    <li>{{ $blog->created_at->format('M d Y') }}</li>
                                 </ul>
                                 <div class="text">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt labore dolore magna aliqua enim minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed perspiciatis unde omnis iste natus error sit voluptem accusantium doloremque laudantium.</p>
-                                    <blockquote>
-                                        <h4>“Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis.”</h4>
-                                    </blockquote>
-                                    <p>Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed perspiciatis unde omnis iste natus error sit voluptem accusantium doloremque laudantium totam rem aperiam.</p>
+                                    <p>{!! $blog->long_descp !!}</p>
                                 </div>
                                 <div class="post-tags">
                                     <ul class="tags-list clearfix">
                                         <li><h5>Tags:</h5></li>
-                                        <li><a href="blog-details.html">Real Estate</a></li>
-                                        <li><a href="blog-details.html">Interior</a></li>
-                                        <li><a href="blog-details.html">Rent Home</a></li>
+                                        @foreach ($tags_all as $tag)
+                                        <li><a href="#">{{ ucwords($tag) }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -170,11 +169,12 @@
                         </div>
                         <div class="widget-content">
                             <ul class="category-list clearfix">
-                                <li><a href="blog-details.html">Home improvement<span>(9)</span></a></li>
-                                <li><a href="blog-details.html">Architecture<span>(5)</span></a></li>
-                                <li><a href="blog-details.html">Tips and advice<span>(2)</span></a></li>
-                                <li><a href="blog-details.html">Interior<span>(7)</span></a></li>
-                                <li><a href="blog-details.html">Real Estate<span>(3)</span></a></li>
+                                @foreach ($b_category as $cat)
+                                    @php
+                                        $post = App\Models\BlogPost::where('blog_cat_id',$cat->id)->get();
+                                    @endphp
+                                <li><a href="{{ url('/blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}<span>({{ count($post) }})</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -183,51 +183,13 @@
                             <h4>Recent Posts</h4>
                         </div>
                         <div class="post-inner">
+                            @foreach ($d_post as $recent)
                             <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-1.jpg" alt=""></a></figure>
-                                <h5><a href="blog-details.html">Best interior design idea for your home.</a></h5>
-                                <span class="post-date">April 10, 2020</span>
+                                <figure class="post-thumb"><a href="blog-details.html"><img src="{{ asset('upload/post_images') }}/{{ $recent->post_image }}" alt="recent"></a></figure>
+                                <h5><a href="blog-details.html">{{ $recent->post_title }}</a></h5>
+                                <span class="post-date">{{ $recent->created_at->format('M d Y') }}</span>
                             </div>
-                            <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-2.jpg" alt=""></a></figure>
-                                <h5><a href="blog-details.html">A digital prescription for the industry.</a></h5>
-                                <span class="post-date">April 09, 2020</span>
-                            </div>
-                            <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-3.jpg" alt=""></a></figure>
-                                <h5><a href="blog-details.html">Strategic & commercial approach with issues.</a></h5>
-                                <span class="post-date">April 08, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidebar-widget category-widget">
-                        <div class="widget-title">
-                            <h4>Archives</h4>
-                        </div>
-                        <div class="widget-content">
-                            <ul class="category-list clearfix">
-                                <li><a href="blog-details.html">November 2016<span>(9)</span></a></li>
-                                <li><a href="blog-details.html">November 2017<span>(5)</span></a></li>
-                                <li><a href="blog-details.html">November 2018<span>(2)</span></a></li>
-                                <li><a href="blog-details.html">November 2019<span>(7)</span></a></li>
-                                <li><a href="blog-details.html">November 2020<span>(3)</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sidebar-widget tags-widget">
-                        <div class="widget-title">
-                            <h4>Popular Tags</h4>
-                        </div>
-                        <div class="widget-content">
-                            <ul class="tags-list clearfix">
-                                <li><a href="blog-details.html">Real Estate</a></li>
-                                <li><a href="blog-details.html">HouseHunting</a></li>
-                                <li><a href="blog-details.html">Architecture</a></li>
-                                <li><a href="blog-details.html">Interior</a></li>
-                                <li><a href="blog-details.html">Sale</a></li>
-                                <li><a href="blog-details.html">Rent Home</a></li>
-                                <li><a href="blog-details.html">Listing</a></li>
-                            </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>

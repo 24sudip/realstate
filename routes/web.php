@@ -241,5 +241,6 @@ Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'
 
 // All Property Search Option
 Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
+Route::get('/blog/cat/list/{id}', [BlogController::class, 'BlogCatList']);
 
 require __DIR__.'/auth.php';
