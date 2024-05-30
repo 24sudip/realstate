@@ -1,4 +1,4 @@
-<!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
+<!-- Life is available only in the present moment. - Thich Nhat Hanh -->
 @extends('frontend.FrontendDashboard')
 
 @section('main')
@@ -10,10 +10,10 @@
     </div>
     <div class="auto-container">
         <div class="content-box clearfix">
-            <h1>{{ $bread_cat->category_name }}</h1>
+            <h1>Blog</h1>
             <ul class="bread-crumb clearfix">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li>{{ $bread_cat->category_name }}</li>
+                <li>Blog</li>
             </ul>
         </div>
     </div>

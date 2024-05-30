@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{BlogCategory, BlogPost, User};
+use App\Models\{BlogCategory, BlogPost, User, Comment};
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Auth;
@@ -183,6 +183,63 @@ class BlogController extends Controller
 
     public function BlogCatList($id){
         $blog = BlogPost::where('blog_cat_id',$id)->get();
-        return view('frontend.blog.BlogCatList',compact('blog'));
+        $bread_cat = BlogCategory::where('id',$id)->first();
+
+        $b_category = BlogCategory::latest()->get();
+        $d_post = BlogPost::latest()->limit(3)->get();
+        return view('frontend.blog.BlogCatList',compact('blog','bread_cat','b_category','d_post'));
+    }
+
+    public function BlogList(){
+        $blog = BlogPost::latest()->get();
+        $b_category = BlogCategory::latest()->get();
+        $d_post = BlogPost::latest()->limit(3)->get();
+        return view('frontend.blog.BlogList',compact('blog','b_category','d_post'));
+    }
+
+    public function StoreComment(Request $request){
+        $p_id = $request->post_id;
+        Comment::insert([
+            'user_id'=>Auth::user()->id,
+            'post_id'=>$p_id,
+            'parent_id'=>null,
+            'subject'=>$request->subject,
+            'message'=>$request->message,
+            'created_at'=>now(),
+        ]);
+        $notification = array(
+            'message'=>'Comment Inserted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AdminBlogComment(){
+        $comment = Comment::where('parent_id',null)->latest()->get();
+        return view('backend.comment.AllComment', compact('comment'));
+    }
+
+    public function AdminCommentReply($id){
+        $comment = Comment::where('id',$id)->first();
+        return view('backend.comment.ReplyComment', compact('comment'));
+    }
+
+    public function ReplyMessage(Request $request){
+        $id = $request->id;
+        $user_id = $request->user_id;
+        $post_id = $request->post_id;
+        Comment::insert([
+            'user_id'=>$user_id,
+            'post_id'=>$post_id,
+            'parent_id'=>$id,
+            'subject'=>$request->subject,
+            'message'=>$request->message,
+            'created_at'=>now(),
+        ]);
+        $notification = array(
+            'message'=>'Reply Inserted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
     }
 }

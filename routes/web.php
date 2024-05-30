@@ -242,5 +242,10 @@ Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'
 // All Property Search Option
 Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
 Route::get('/blog/cat/list/{id}', [BlogController::class, 'BlogCatList']);
+Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog.list');
+Route::post('/store/comment', [BlogController::class, 'StoreComment'])->name('store.comment');
+Route::get('/admin/blog/comment', [BlogController::class, 'AdminBlogComment'])->name('admin.blog.comment');
+Route::get('/admin/comment/reply/{id}', [BlogController::class, 'AdminCommentReply'])->name('admin.comment.reply');
+Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('reply.message');
 
 require __DIR__.'/auth.php';

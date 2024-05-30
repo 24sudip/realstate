@@ -179,18 +179,17 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#authpages"
                     role="button" aria-expanded="false" aria-controls="authpages">
                     <i class="link-icon" data-feather="unlock"></i>
-                    <span class="link-title">Authentication</span>
+                    <span class="link-title">Blog Comment</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="authpages">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/auth/login.html" class="nav-link">Login</a>
+                            <a href="{{ route('admin.blog.comment') }}" class="nav-link">Comment</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/auth/register.html"
-                                class="nav-link">Register</a>
-                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{ asset('backend/pages') }}" class="nav-link">Register</a>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
