@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\MultiImage;
-use App\Models\Facility;
+use App\Models\{Facility, Schedule};
 use App\Models\{PropertyType, State};
 use App\Models\{Amenities, PropertyMessage};
 use App\Models\{User, PackagePlan};
@@ -157,5 +157,32 @@ class IndexController extends Controller
             $q->where('type_name','like','%'.$s_type.'%');
         })->get();
         return view('frontend.property.PropertySearch',compact('property'));
+    }
+
+    public function StoreSchedule(Request $request){
+        $a_id = $request->agent_id;
+        $p_id = $request->property_id;
+        if (Auth::check()) {
+            Schedule::insert([
+                'user_id'=>Auth::user()->id,
+                'property_id'=>$p_id,
+                'agent_id'=>$a_id,
+                'tour_date'=>$request->tour_date,
+                'tour_time'=>$request->tour_time,
+                'message'=>$request->message,
+                'created_at'=>now(),
+            ]);
+            $notification = array(
+                'message'=>'Request Sent Successfully',
+                'alert-type'=>'success',
+            );
+            return redirect()->back()->with($notification);
+        } else {
+            $notification = array(
+                'message'=>'Please Login Your Account First',
+                'alert-type'=>'error',
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

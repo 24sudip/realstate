@@ -185,6 +185,10 @@ Route::middleware(['auth','role:agent'])->group(function () {
         Route::get('/agent/delete/property/{id}', 'AgentDeleteProperty')->name('agent.delete.property');
         Route::get('/agent/property/message', 'AgentPropertyMessage')->name('agent.property.message');
         Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');
+        // Schedule Request Route
+        Route::get('/agent/schedule/request', 'AgentScheduleRequest')->name('agent.schedule.request');
+        Route::get('/agent/details/schedule/{id}', 'AgentDetailsSchedule')->name('agent.details.schedule');
+        Route::post('/agent/update/schedule', 'AgentUpdateSchedule')->name('agent.update.schedule');
     });
     // Agent Buy Package Routes
     Route::controller(AgentPropertyController::class)->group(function () {
@@ -247,5 +251,8 @@ Route::post('/store/comment', [BlogController::class, 'StoreComment'])->name('st
 Route::get('/admin/blog/comment', [BlogController::class, 'AdminBlogComment'])->name('admin.blog.comment');
 Route::get('/admin/comment/reply/{id}', [BlogController::class, 'AdminCommentReply'])->name('admin.comment.reply');
 Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('reply.message');
+
+// Schedule Message Request Route
+Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name('store.schedule');
 
 require __DIR__.'/auth.php';

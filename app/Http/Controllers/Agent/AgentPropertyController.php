@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\MultiImage;
-use App\Models\Facility;
+use App\Models\{Facility, Schedule};
 use App\Models\{PropertyType, State};
 use App\Models\{Amenities, PropertyMessage};
 use App\Models\{User, PackagePlan};
@@ -16,6 +16,8 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ScheduleMail;
 
 class AgentPropertyController extends Controller
 {
@@ -440,5 +442,36 @@ class AgentPropertyController extends Controller
 
         $msg_details = PropertyMessage::findOrFail($id);
         return view('agent.message.MessageDetails',compact('user_msg','msg_details'));
+    }
+
+    public function AgentScheduleRequest(){
+        $id = Auth::user()->id;
+        $user_msg = Schedule::where('agent_id',$id)->get();
+        return view('agent.schedule.ScheduleRequest', compact('user_msg'));
+    }
+
+    public function AgentDetailsSchedule($id){
+        $schedule = Schedule::findOrFail($id);
+        return view('agent.schedule.ScheduleDetails',compact('schedule'));
+    }
+
+    public function AgentUpdateSchedule(Request $request){
+        $s_id = $request->id;
+        Schedule::findOrFail($s_id)->update([
+            'status'=>'1',
+        ]);
+        // Start Send Email
+        $send_mail = Schedule::findOrFail($s_id);
+        $data = [
+            'tour_date'=>$send_mail->tour_date,
+            'tour_time'=>$send_mail->tour_time,
+        ];
+        Mail::to($request->email)->send(new ScheduleMail($data));
+        // End Send Email
+        $notification = array(
+            'message'=>'You Have Confirmed Schedule Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('agent.schedule.request')->with($notification);
     }
 }

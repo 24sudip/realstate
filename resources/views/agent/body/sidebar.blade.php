@@ -112,13 +112,13 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button"
                     aria-expanded="false" aria-controls="charts">
                     <i class="link-icon" data-feather="pie-chart"></i>
-                    <span class="link-title">Charts</span>
+                    <span class="link-title">Schedule Request</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="charts">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/charts/apex.html" class="nav-link">Apex</a>
+                            <a href="{{ route('agent.schedule.request') }}" class="nav-link">Schedule Request </a>
                         </li>
                     </ul>
                 </div>
