@@ -90,4 +90,12 @@ class UserController extends Controller
 
         return redirect('/login')->with($notification);
     }
+
+    public function UserScheduleRequest()
+    {
+        $id = Auth::user()->id;
+        $user_data = User::find($id);
+        // $s_request = 
+        return view('frontend.userDashboard.EditProfile', compact('user_data'));
+    }
 }

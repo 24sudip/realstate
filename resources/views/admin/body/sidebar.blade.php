@@ -197,17 +197,17 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#errorpages"
                     role="button" aria-expanded="false" aria-controls="errorpages">
                     <i class="link-icon" data-feather="cloud-off"></i>
-                    <span class="link-title">Error</span>
+                    <span class="link-title">SMTP Setting</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="errorpages">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/error/404.html" class="nav-link">404</a>
+                            <a href="{{ route('smtp.setting') }}" class="nav-link">SMTP</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ asset('backend/pages') }}/error/500.html" class="nav-link">500</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
