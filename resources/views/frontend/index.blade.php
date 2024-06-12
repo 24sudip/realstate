@@ -2,6 +2,10 @@
 
 @section('main')
 
+    @section('title')
+    Easy Realestate
+    @endsection
+
     @include('frontend.home.banner')
 
     @include('frontend.home.category')

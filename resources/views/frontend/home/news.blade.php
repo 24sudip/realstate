@@ -14,7 +14,7 @@
                 <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><a href="blog-details.html"><img src="{{ asset('upload/post_images') }}/{{ $item->post_image }}" alt="post_image"></a></figure>
+                            <figure class="image"><a href="{{ url('blog/details/'.$item->post_slug) }}"><img src="{{ asset('upload/post_images') }}/{{ $item->post_image }}" alt="post_image"></a></figure>
                             <span class="category">New</span>
                         </div>
                         <div class="lower-content">

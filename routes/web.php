@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController, StateController, TestimonialController};
-use App\Http\Controllers\Backend\{BlogController, SettingController};
+use App\Http\Controllers\Backend\{BlogController, SettingController, RoleController};
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\{IndexController, WishlistController, CompareController};
 use App\Http\Controllers\{AgentController, UserController};
@@ -170,6 +170,20 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::controller(SettingController::class)->group(function () {
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('/update/smtp/setting', 'UpdateSmtpSetting')->name('update.smtp.setting');
+    });
+    // Site Setting All Route
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/site/setting', 'SiteSetting')->name('site.setting');
+        Route::post('/update/site/setting', 'UpdateSiteSetting')->name('update.site.setting');
+    });
+    // Permission All Routes
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/all/permission', 'AllPermission')->name('all.permission');
+        Route::get('/add/permission', 'AddPermission')->name('add.permission');
+        Route::post('/store/permission', 'StorePermission')->name('store.permission');
+        Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
+        Route::post('/update/permission', 'UpdatePermission')->name('update.permission');
+        Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
     });
 });
 

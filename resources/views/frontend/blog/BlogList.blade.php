@@ -2,6 +2,9 @@
 @extends('frontend.FrontendDashboard')
 
 @section('main')
+    @section('title')
+    Blog Easy Realestate
+    @endsection
 <!--Page Title-->
 <section class="page-title-two bg-color-1 centred">
     <div class="pattern-layer">

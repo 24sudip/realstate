@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\{User, Schedule};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -95,7 +95,7 @@ class UserController extends Controller
     {
         $id = Auth::user()->id;
         $user_data = User::find($id);
-        // $s_request = 
-        return view('frontend.userDashboard.EditProfile', compact('user_data'));
+        $s_request = Schedule::where('user_id',$id)->get();
+        return view('frontend.message.ScheduleRequest', compact('user_data','s_request'));
     }
 }
