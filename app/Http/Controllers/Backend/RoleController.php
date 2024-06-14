@@ -9,6 +9,8 @@ use Spatie\Permission\Models\Permission;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PermissionExport;
 use App\Imports\PermissionImport;
+use App\Models\User;
+use DB;
 
 class RoleController extends Controller
 {
@@ -118,6 +120,28 @@ class RoleController extends Controller
         Role::findOrFail($id)->delete();
         $notification = array(
             'message'=>'Role Deleted Successfully',
+            'alert-type'=>'success',
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AddRolesPermission() {
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $permission_groups = User::GetPermissionGroups();
+        return view('backend.pages.roleSetup.AddRolesPermission', compact('roles','permissions','permission_groups'));
+    }
+
+    public function RolePermissionStore(Request $request) {
+        $data = array();
+        $permissions = $request->permission;
+        foreach ($permissions as $key => $item) {
+            $data['role_id'] = $request->role_id;
+            $data['permission_id'] = $item;
+            DB::table('role_has_permissions')->insert($data);
+        }
+        $notification = array(
+            'message'=>'Role Permission Added Successfully',
             'alert-type'=>'success',
         );
         return redirect()->back()->with($notification);
