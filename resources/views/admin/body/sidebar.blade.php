@@ -187,9 +187,6 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.blog.comment') }}" class="nav-link">Comment</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}" class="nav-link">Register</a>
-                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -205,9 +202,6 @@
                         <li class="nav-item">
                             <a href="{{ route('smtp.setting') }}" class="nav-link">SMTP</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ asset('backend/pages') }}/error/500.html" class="nav-link">500</a>
-                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -237,8 +231,26 @@
                         <li class="nav-item">
                             <a href="{{ route('add.roles.permission') }}" class="nav-link">Role in Permission</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('all.roles.permission') }}" class="nav-link">All Role in Permission</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#admin"
+                    role="button" aria-expanded="false" aria-controls="admin">
+                    <i class="link-icon" data-feather="cloud-off"></i>
+                    <span class="link-title">Manage Admin User</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="admin">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('all.admin') }}" class="nav-link">All Admin</a>
+                        </li>
                         {{-- <li class="nav-item">
-                            <a href="{{ route('backend/pages') }}" class="nav-link">500</a>
+                            <a href="{{ route('add.admin') }}" class="nav-link">Add Admin</a>
                         </li> --}}
                     </ul>
                 </div>
