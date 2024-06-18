@@ -19,6 +19,7 @@
                 </a>
             </li>
             <li class="nav-item nav-category">Real Estate</li>
+            @if (Auth::user()->can('type.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button"
                     aria-expanded="false" aria-controls="emails">
@@ -28,15 +29,21 @@
                 </a>
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
+                        @if (Auth::user()->can('all.type'))
                         <li class="nav-item">
                             <a href="{{ route('all.type') }}" class="nav-link">All Type</a>
                         </li>
+                        @endif
+
+                        @if (Auth::user()->can('add.type'))
                         <li class="nav-item">
                             <a href="{{ route('add.type') }}" class="nav-link">Add Type</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button"
                     aria-expanded="false" aria-controls="uiComponents">
@@ -104,6 +111,7 @@
                     </ul>
                 </div>
             </li>
+            @if (Auth::user()->can('state.menu'))
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button"
                     aria-expanded="false" aria-controls="charts">
@@ -113,15 +121,21 @@
                 </a>
                 <div class="collapse" id="charts">
                     <ul class="nav sub-menu">
+                        @if (Auth::user()->can('all.state'))
                         <li class="nav-item">
                             <a href="{{ route('all.state') }}" class="nav-link">All State</a>
                         </li>
+                        @endif
+
+                        @if (Auth::user()->can('add.state'))
                         <li class="nav-item">
                             <a href="{{ route('add.state') }}" class="nav-link">Add State</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button"
                     aria-expanded="false" aria-controls="tables">
@@ -249,9 +263,9 @@
                         <li class="nav-item">
                             <a href="{{ route('all.admin') }}" class="nav-link">All Admin</a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('add.admin') }}" class="nav-link">Add Admin</a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </li>

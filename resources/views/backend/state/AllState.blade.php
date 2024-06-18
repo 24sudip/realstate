@@ -34,8 +34,13 @@
                                 <img src="{{ asset('upload/state_images') }}/{{ $item->state_image }}" style="width:70px;height:40px;">
                             </td>
                             <td>
+                                @if (Auth::user()->can('edit.state'))
                                 <a href="{{ route('edit.state', $item->id) }}" class="btn btn-inverse-warning">Edit</a>
+                                @endif
+
+                                @if (Auth::user()->can('delete.state'))
                                 <a href="{{ route('delete.state', $item->id) }}" class="btn btn-inverse-danger" id="delete">Delete</a>
+                                @endif
                             </td>
                             </tr>
                             @endforeach

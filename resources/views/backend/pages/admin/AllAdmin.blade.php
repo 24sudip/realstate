@@ -10,7 +10,7 @@
 
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{ route('add.agent') }}" class="btn btn-inverse-info">Add Admin</a>
+            <a href="{{ route('add.admin') }}" class="btn btn-inverse-info">Add Admin</a>
         </ol>
     </nav>
 
@@ -36,17 +36,21 @@
                             @foreach($all_admin as $key => $item)
                             <tr>
                             <td>{{ $key+1 }}</td>
-                            <td><img src="{{ (!empty($item->photo)) ? url('upload/admin_photos/'.$item->photo) : url('upload/admin_photos/no_image.jpg') }}" style="width: 70px;height: 70px;">
+                            <td><img src="{{ (!empty($item->photo)) ? url('upload/admin_photos/'.$item->photo) : url('upload/no_image.jpg') }}" style="width: 70px;height: 70px;">
                             </td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
-                            <td>{{ $item->role }}</td>
                             <td>
-                                <a href="{{ route('edit.agent', $item->id) }}" class="btn btn-inverse-warning" title="Edit">
+                                @foreach ($item->roles as $role)
+                                <span class="badge badge-pill bg-danger">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                <a href="{{ route('edit.admin', $item->id) }}" class="btn btn-inverse-warning" title="Edit">
                                     <i data-feather="edit"></i>
                                 </a>
-                                <a href="{{ route('delete.agent', $item->id) }}" class="btn btn-inverse-danger" id="delete" title="Delete">
+                                <a href="{{ route('delete.admin', $item->id) }}" class="btn btn-inverse-danger" id="delete" title="Delete">
                                     <i data-feather="trash-2"></i>
                                 </a>
                             </td>
