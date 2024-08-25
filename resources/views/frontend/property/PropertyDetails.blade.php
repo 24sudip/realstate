@@ -239,7 +239,13 @@
                                         <li><i class="fas fa-map-marker-alt"></i>{{ $property->relation_to_user->address }}</li>
                                         <li><i class="fas fa-phone"></i><a href="tel:03030571965">{{ $property->relation_to_user->phone }}</a></li>
                                     </ul>
-                                    <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
+                                    @auth
+                                    <div id="app" class="btn-box">
+                                        <send-message :receiver_id="{{ $property->agent_id }}" receiver_name="{{ $property->relation_to_user->name }}"></send-message>
+                                    </div>
+                                    @else
+                                    <span class="text-danger">For Chat Login First</span>
+                                    @endauth
                                 </div>
                                 @endif
                             </div>

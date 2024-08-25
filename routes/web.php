@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\{PropertyTypeController, PropertyController, StateController, TestimonialController};
-use App\Http\Controllers\Backend\{BlogController, SettingController, RoleController};
+use App\Http\Controllers\Backend\{BlogController, SettingController, RoleController, ChatController};
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\{IndexController, WishlistController, CompareController};
 use App\Http\Controllers\{AgentController, UserController};
@@ -301,5 +301,8 @@ Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('re
 
 // Schedule Message Request Route
 Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name('store.schedule');
+
+// Chat Post Request Route
+Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.message');
 
 require __DIR__.'/auth.php';
