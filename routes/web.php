@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::get('/user/schedule/request', [UserController::class, 'UserScheduleRequest'])->name('user.schedule.request');
+    Route::get('/live/chat', [UserController::class, 'LiveChat'])->name('live.chat');
 
     // User Wishlist Route
     Route::controller(WishlistController::class)->group(function () {
@@ -304,5 +305,7 @@ Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name(
 
 // Chat Post Request Route
 Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.message');
+Route::get('/user-all', [ChatController::class, 'GetAllUser']);
+Route::get('/user-message/{id}', [ChatController::class, 'UserMsgById']);
 
 require __DIR__.'/auth.php';
