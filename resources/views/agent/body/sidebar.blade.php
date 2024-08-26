@@ -124,6 +124,13 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a href="{{ route('agent.live.chat') }}"
+                    class="nav-link">
+                    <i class="link-icon" data-feather="hash"></i>
+                    <span class="link-title">Live Chat</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button"
                     aria-expanded="false" aria-controls="tables">
                     <i class="link-icon" data-feather="layout"></i>
@@ -214,13 +221,6 @@
                 </div>
             </li>
             <li class="nav-item nav-category">Docs</li>
-            <li class="nav-item">
-                <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank"
-                    class="nav-link">
-                    <i class="link-icon" data-feather="hash"></i>
-                    <span class="link-title">Documentation</span>
-                </a>
-            </li>
         </ul>
     </div>
 </nav>

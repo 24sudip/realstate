@@ -307,5 +307,6 @@ Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name(
 Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.message');
 Route::get('/user-all', [ChatController::class, 'GetAllUser']);
 Route::get('/user-message/{id}', [ChatController::class, 'UserMsgById']);
+Route::get('/agent/live/chat', [ChatController::class, 'AgentLiveChat'])->name('agent.live.chat');
 
 require __DIR__.'/auth.php';

@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^5.1.2",
+        "moment": "^2.30.1",
         "vue": "^3.4.38",
         "vue-loader": "^17.4.2"
     }
